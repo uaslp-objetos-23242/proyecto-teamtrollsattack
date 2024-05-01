@@ -17,6 +17,7 @@ public abstract class Entity extends Actor
     protected int health;
     protected int damageDealt;
     protected int speed;
+
     public Entity(int health, int damageDealt, int speed)
     {
         this.health = health;
@@ -26,19 +27,11 @@ public abstract class Entity extends Actor
 
     public void act()
     {
-        // Add your action code here.
+
     }
 
     //Nivela a todos al ras del suelo
-    public void nivelateOnFloor()
-    {
-        int x = getX();
-        int y = getY();
-        if(isOnFloor())
-        {
-            setLocation(x, y - speed);
-        }
-    }
+    public abstract void nivelateOnFloor();
 
     //Checa si el personaje esta tocando el suelo
     public boolean isOnFloor()
@@ -52,7 +45,6 @@ public abstract class Entity extends Actor
             return false;
         }
     }
-
     //Regresa la salud
     public int getHealth()
     {
