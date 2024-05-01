@@ -32,6 +32,17 @@ public class Enemy extends Entity
         setLocation(x + speed, y);
     }
 
+    //Nivela a todos al ras del suelo, heredado de Entity
+    public void nivelateOnFloor()
+    {
+        int x = getX();
+        int y = getY();
+        if(isOnFloor())
+        {
+            setLocation(x, y - 1);
+        }
+    }
+
     public void despawnOnDeath()
     {
         if(getHealth() <= 0)
