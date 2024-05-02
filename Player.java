@@ -12,6 +12,7 @@ public class Player extends Entity
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+
     // Sobreescudo que tiene al entrar a una nueva sala
     private int armorPoints;
     // Puntos de experiencia para mejorar sus atributos
@@ -20,9 +21,24 @@ public class Player extends Entity
     private int jumpHeight = 100;
     // Gravedad del jugador
     private int gravity = 0;
+    // Sirve para llevar un flujo mas manejable de la gravedad
     private int count = 0;
-    // Variable para obligar al jugador a presionar cada que quiera saltar
+    // Frames antes de poder volver a atacar
+    private int attackDelayTimer = 20;
+    // Obligar al jugador a soltar el boton de salto para volver a saltar
     private boolean jumpPressed = false;
+    // Determina si se puede atacar o no
+    private boolean attackOnCooldown = false;
+    // Obliga a que el jugador suelte el boton de ataque para volver a atacar
+    private boolean attackPressed = false;
+    // Inicia el contador de frames de ataque
+    private boolean attackAnimation = false;
+    // Frames que dura la animacion de ataque
+    private int attackFrames = 10;
+
+    /**
+     * Pos el constructor, que mas xd
+     */
     public Player()
     {
         // Salud, daño causado, velocidad
@@ -39,9 +55,17 @@ public class Player extends Entity
         slideAround();
         fall();
         jump();
+        attack();
+        if(attackAnimation)
+            playAttackAnimation();
+        if(attackOnCooldown)
+            attackDelay();
     }
 
-    // Movimiento casual, izquierda y derecha
+    /**
+     * Movimiento casual, izquierda y derecha
+     * Obtiene la posicion del personaje y le agrega o resta valor a x para moverse
+     */
     public void slideAround()
     {
         int x = getX();
@@ -58,7 +82,10 @@ public class Player extends Entity
         }
     }
 
-    // El count y * 9 en gravity es para tratar de nivelar una caida lenta
+    /**
+     * Hace que el jugador caiga por gravedad
+     * El count y * 9 en gravity es para tratar de nivelar una caida lenta
+     */
     public void fall()
     {
         if(!isOnFloor() && count % 2 == 0)
@@ -66,7 +93,11 @@ public class Player extends Entity
         else
             gravity = 0;
     }
-    // Saltarcal presionar espacio (aun falta una altura maxima de salto y momento cuando empieza a caer por gravedad)
+
+    /**
+     * Saltar al presionar espacio
+     * Antes de saltar revisa que la tecla espacio no este ya presionada y que el personaje este en el suelo
+     */
     public void jump()
     {
         if(Greenfoot.isKeyDown("space") && !jumpPressed && isOnFloor())
@@ -78,14 +109,19 @@ public class Player extends Entity
             jumpPressed = false;
     }
 
-    // La gravedad solo afecta cuando no esta tocando el suelo y no puede ser mayor a 24
+    /**
+     * La gravedad  no puede ser mayor a 20 y solo afecta cuando no esta tocando el suelo
+     */
     public void increaseGravity()
     {
         if(gravity < 20 && !isOnFloor())
             gravity++;
     }
 
-    //Nivela a todos al ras del suelo, heredado de forma abstracta de Entity
+    /**
+     * Nivela a todos al ras del suelo
+     * heredado de forma abstracta de Entity
+     */
     public void nivelateOnFloor()
     {
         int x = getX();
@@ -96,12 +132,48 @@ public class Player extends Entity
         }
     }
 
-    // Ataca al presionar j
+    /**
+     * Ataca al presionar j
+     * Solo puede atacar si no esta en cooldown, se solto la tecla despues del ataque anterior y la animacion de ataque ya acabo
+     */
     public void attack()
     {
-        if(Greenfoot.isKeyDown("j"))
+        if(Greenfoot.isKeyDown("j") && !attackOnCooldown && !attackPressed && !attackAnimation)
         {
-            //Ataca
+            setRotation(270);
+            attackPressed = true;
+            attackAnimation = true;
+        }
+        if(!Greenfoot.isKeyDown("j"))
+            attackPressed = false;
+    }
+
+    /**
+     * Contador para la duracion de la animacion de ataque
+     */
+    public void playAttackAnimation()
+    {
+        attackFrames--;
+        if(attackFrames == 0)
+        {
+            setRotation(0);
+            attackAnimation = false;
+            attackOnCooldown = true;
+            attackFrames = 10;
+        }
+    }
+
+    /**
+     * Contador para el cooldown entre ataques
+     */
+    public void attackDelay()
+    {
+        //setRotation(0);
+        attackDelayTimer--;
+        if(attackDelayTimer == 0)
+        {
+            attackDelayTimer = 20;
+            attackOnCooldown = false;
         }
     }
 
@@ -109,4 +181,5 @@ public class Player extends Entity
     {
         return this.gravity;
     }
+
 }
