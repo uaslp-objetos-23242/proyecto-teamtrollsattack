@@ -60,6 +60,11 @@ public abstract class Entity extends Actor
     {
         return this.health;
     }
+    
+    public void setHealth()
+    {
+        this.health--;
+    }
 
     //Metodo abstracto para moverse
     public abstract void slideAround();

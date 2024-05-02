@@ -31,6 +31,6 @@ public class PlaceHolderBG extends World
         Floor floor = new Floor();
         addObject(floor, getWidth()/2, getHeight()/2);
         Player player = new Player();
-        addObject(player,31,369);
+        addObject(player,getWidth()/2,getHeight()/2 - 50);
     }
 }
