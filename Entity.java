@@ -29,6 +29,16 @@ public abstract class Entity extends Actor
     {
 
     }
+    
+    public void scaleDownImage(int horizontalScaleDown, int verticalScaleDown)
+    {
+        getImage().scale(getImage().getWidth()/horizontalScaleDown, getImage().getHeight()/verticalScaleDown);
+    }
+    
+    public void scaleUpImage(int horizontalScaleDown, int verticalScaleDown)
+    {
+        getImage().scale(getImage().getWidth() * horizontalScaleDown, getImage().getHeight() * verticalScaleDown);
+    }
 
     //Nivela a todos al ras del suelo
     public abstract void nivelateOnFloor();
