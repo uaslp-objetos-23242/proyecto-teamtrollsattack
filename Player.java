@@ -42,8 +42,8 @@ public class Player extends Entity
     public Player()
     {
         // Salud, daño causado, velocidad
-        super(1,1,5);
-        this.armorPoints = 0;
+        super(3,1,5);
+        this.armorPoints = 2;
         this.expPoints = 0;
         scaleDownImage(2, 2);
     }
@@ -57,6 +57,7 @@ public class Player extends Entity
         fall();
         jump();
         attack();
+        reduceHealth();
         if(attackAnimation)
             playAttackAnimation();
         if(attackOnCooldown)
@@ -176,6 +177,27 @@ public class Player extends Entity
             attackDelayTimer = 20;
             attackOnCooldown = false;
         }
+    }
+
+    public void reduceHealth()
+    {
+        if(isDamaged())
+        {
+            if(armorPoints > 0)
+                armorPoints--;
+            else if(this.health > 0)
+                this.health--;
+        }
+    }
+
+    public boolean isDamaged()
+    {
+        if(isTouching(Enemy.class))
+        {
+            return true;
+        }
+        else
+            return false;
     }
 
     public int getGravity()
