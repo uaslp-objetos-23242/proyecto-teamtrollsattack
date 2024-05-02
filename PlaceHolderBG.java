@@ -16,7 +16,8 @@ public class PlaceHolderBG extends World
     public PlaceHolderBG()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(800, 400, 1); 
+        super(1400, 900, 1); 
+        //getBackground().scale(getBackground().getWidth()/2, getBackground().getHeight()/2);
         prepare();
     }
     
@@ -28,9 +29,7 @@ public class PlaceHolderBG extends World
     {
 
         Floor floor = new Floor();
-        addObject(floor,241,339);
-        floor.setLocation(452,391);
-        floor.setLocation(434,398);
+        addObject(floor, getWidth()/2, getHeight()/2);
         Player player = new Player();
         addObject(player,31,369);
     }
