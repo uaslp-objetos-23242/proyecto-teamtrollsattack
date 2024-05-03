@@ -35,6 +35,10 @@ public class Player extends Entity
     private boolean attackAnimation = false;
     // Frames que dura la animacion de ataque
     private int attackFrames = 10;
+    
+    private boolean playerInvincible = false;
+    private int invincibilityFrames = 60;
+    private boolean usingShield = false;
 
     /**
      * Pos el constructor, que mas xd
@@ -50,6 +54,8 @@ public class Player extends Entity
 
     public void act()
     {
+        debugHud();
+        hud();
         nivelateOnFloor();
         increaseGravity();
         count++;
@@ -57,6 +63,9 @@ public class Player extends Entity
         fall();
         jump();
         attack();
+        useShield();
+        if(playerInvincible)
+            invincibilityTimer();
         reduceHealth();
         if(attackAnimation)
             playAttackAnimation();
@@ -72,12 +81,12 @@ public class Player extends Entity
     {
         int x = getX();
         int y = getY();
-        if(Greenfoot.isKeyDown("d"))
+        if(Greenfoot.isKeyDown("d") && !usingShield)
         {
             setLocation(x + speed, y);
             // Hay que hacerlo girar a la derecha
         }
-        if(Greenfoot.isKeyDown("a"))
+        if(Greenfoot.isKeyDown("a") && !usingShield)
         {
             setLocation(x - speed, y);
             // Hay que hacerlo girar a la izquierda
@@ -181,12 +190,18 @@ public class Player extends Entity
 
     public void reduceHealth()
     {
-        if(isDamaged())
+        if(isDamaged() && !playerInvincible && !usingShield)
         {
             if(armorPoints > 0)
+            {
                 armorPoints--;
+                playerInvincible = true;
+            }
             else if(this.health > 0)
+            {
                 this.health--;
+                playerInvincible = true;
+            }
         }
     }
 
@@ -199,10 +214,35 @@ public class Player extends Entity
         else
             return false;
     }
-
-    public int getGravity()
+    
+    public void invincibilityTimer()
     {
-        return this.gravity;
+        invincibilityFrames--;
+        if(invincibilityFrames == 0)
+        {
+            playerInvincible = false;
+            invincibilityFrames = 300;
+        }
+    }
+    
+    public void useShield()
+    {
+        if(Greenfoot.isKeyDown("k"))
+            usingShield = true;
+        else
+            usingShield = false;
+    }
+    
+    public void hud()
+    {
+        getWorld().showText("health: " + health, 50, 50);
+        getWorld().showText("armor: " + armorPoints, 50, 70);
+    }
+    
+    public void debugHud()
+    {
+        getWorld().showText("Invincibility timer: " + invincibilityFrames, 200, 50);
+        getWorld().showText("Invincibility timer: " + usingShield, 200, 70);
     }
 
 }
