@@ -21,7 +21,7 @@ public class Player extends Entity
     private int jumpHeight = 100;
     // Gravedad del jugador
     private int gravity = 0;
-    // Sirve para llevar un flujo mas manejable de la gravedad
+    // Sirve para llevar un flujo mas manejable de la gravedad y algunos temporizadores
     private int count = 0;
     // Frames antes de poder volver a atacar
     private int attackDelayTimer = 20;
@@ -35,10 +35,14 @@ public class Player extends Entity
     private boolean attackAnimation = false;
     // Frames que dura la animacion de ataque
     private int attackFrames = 10;
-    
+    // Estado de invencibilidad del jugador
     private boolean playerInvincible = false;
+    // Tiempo que el jugador es invencile despues de recibir daño
     private int invincibilityFrames = 60;
+    // Estado de uso del escudo
     private boolean usingShield = false;
+    // Checa la direccio que el personaje esta viendo, sirve para la direccion de los sprites
+    private boolean facingLeft = false;
 
     /**
      * Pos el constructor, que mas xd
@@ -81,15 +85,17 @@ public class Player extends Entity
     {
         int x = getX();
         int y = getY();
-        if(Greenfoot.isKeyDown("d") && !usingShield)
+        if(Greenfoot.isKeyDown("d") && !usingShield && !attackAnimation)
         {
             setLocation(x + speed, y);
-            // Hay que hacerlo girar a la derecha
+            facingLeft = false;
+            moveAnimation();
         }
-        if(Greenfoot.isKeyDown("a") && !usingShield)
+        if(Greenfoot.isKeyDown("a") && !usingShield && !attackAnimation)
         {
             setLocation(x - speed, y);
-            // Hay que hacerlo girar a la izquierda
+            facingLeft = true;
+            moveAnimation();
         }
     }
 
@@ -149,9 +155,18 @@ public class Player extends Entity
      */
     public void attack()
     {
-        if(Greenfoot.isKeyDown("j") && !attackOnCooldown && !attackPressed && !attackAnimation)
+        if(Greenfoot.isKeyDown("j") && !attackOnCooldown && !attackPressed && !attackAnimation && isOnFloor())
         {
-            setRotation(270);
+            if(facingLeft)
+            {
+                setImage("Link_Ataca_Izquierda.png");
+                scaleDownImage(2, 2);
+            }
+            else
+            {
+                setImage("Link_Ataca_Derecha.png");
+                scaleDownImage(2, 2);
+            }
             attackPressed = true;
             attackAnimation = true;
         }
@@ -183,11 +198,17 @@ public class Player extends Entity
         attackDelayTimer--;
         if(attackDelayTimer == 0)
         {
+            moveAnimation();
             attackDelayTimer = 20;
             attackOnCooldown = false;
         }
     }
 
+    /**
+     * Recude la salud del personaje
+     * Unicamente si el jugador no esta invencible ni usando el escudo
+     * Despues checa si aun tiene armadura, de ser asi la reduce primero y al terminarse comienza a reducir salud
+     */
     public void reduceHealth()
     {
         if(isDamaged() && !playerInvincible && !usingShield)
@@ -205,6 +226,9 @@ public class Player extends Entity
         }
     }
 
+    /**
+     * Revisa si ha sido impactado con alguien o algo de la clase Enemy
+     */
     public boolean isDamaged()
     {
         if(isTouching(Enemy.class))
@@ -214,35 +238,92 @@ public class Player extends Entity
         else
             return false;
     }
-    
+
+    /**
+     * Temporizador de invencibilidad
+     */
     public void invincibilityTimer()
     {
         invincibilityFrames--;
         if(invincibilityFrames == 0)
         {
             playerInvincible = false;
-            invincibilityFrames = 300;
+            invincibilityFrames = 60;
         }
     }
-    
+
+    /**
+     * Usa el escudo al presionar k
+     */
     public void useShield()
     {
         if(Greenfoot.isKeyDown("k"))
+        {
             usingShield = true;
+            shieldAnimation();
+        }
         else
+        {
             usingShield = false;
+            // Hay que hacer que deje de mostrar la animacion de usar el escudo
+        }
     }
-    
+
+    /**
+     * Muestra un sprite diferente dependiendo de en que posicion se mueva
+     */
+    public void moveAnimation()
+    {
+        if(facingLeft)
+        {
+            setImage("Link_Izquierda.png");
+            scaleDownImage(2, 2);
+        }
+        else
+        {
+            setImage("Link_Derecha.png");
+            scaleDownImage(2, 2);
+        }
+    }
+
+    /**
+     * Muestra un sprite diferente de uso del escudo dependiendo de en que posicion se mueva
+     */
+    public void shieldAnimation()
+    {
+        if(facingLeft)
+        {
+            setImage("Link_Escudo_Izquierda.png");
+            scaleDownImage(2, 2);
+        }
+        else
+        {
+            setImage("Link_Escudo_Derecha.png");
+            scaleDownImage(2, 2);
+        }
+    }
+
+    /**
+     * Muestra informacion del personaje en pantalla
+     */
     public void hud()
     {
         getWorld().showText("health: " + health, 50, 50);
         getWorld().showText("armor: " + armorPoints, 50, 70);
     }
-    
+
+    /**
+     * Muestra informacion sobre variables para debuguear
+     */
     public void debugHud()
     {
         getWorld().showText("Invincibility timer: " + invincibilityFrames, 200, 50);
-        getWorld().showText("Invincibility timer: " + usingShield, 200, 70);
+        getWorld().showText("Invincibility: " + usingShield, 200, 70);
+        getWorld().showText("Facing left: " + facingLeft, 200, 90);
+        getWorld().showText("On floor: " + isOnFloor(), 200, 110);
+        getWorld().showText("Current gravity: " + gravity, 200, 130);
+        getWorld().showText("X pos: " + getX(), 350, 50);
+        getWorld().showText("Y pos: " + getY(), 350, 70);
     }
 
 }
