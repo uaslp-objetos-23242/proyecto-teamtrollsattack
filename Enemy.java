@@ -14,6 +14,9 @@ public class Enemy extends Entity
      */
     //Si es jefe, tebdra atributos especiales como daño y vida aumentados
     private boolean isBoss;
+    
+    private int originalXPos = -1;
+    private int originalYPos = -1;
     public Enemy(int health, int damageDealt, int speed)
     {
         // Salud, daño causado, velocidad
@@ -25,11 +28,22 @@ public class Enemy extends Entity
         // Add your action code here.
     }
 
-    public void slideAround()
+    public void wander()
     {
-        int x = getX();
-        int y = getY();
-        setLocation(x + speed, y);
+        setLocation(getX() + speed, getY());
+        if(getX() == originalXPos - 100 || getX() == originalXPos + 100)
+        {
+            speed *= -1;
+        }
+    }
+    public void setOriginalPosition()
+    {
+        if(originalXPos == -1 || originalYPos == -1)
+        {
+            originalXPos = getX();
+            originalYPos = getY();
+        }
+
     }
 
     //Nivela a todos al ras del suelo, heredado de Entity
@@ -49,5 +63,11 @@ public class Enemy extends Entity
         {
 
         }
+    }
+    
+    public void debugHud()
+    {
+        getWorld().showText("X pos: " + getX(), 700, 50);
+        getWorld().showText("Y pos: " + getY(), 700, 70);
     }
 }

@@ -32,5 +32,9 @@ public class PlaceHolderBG extends World
         addObject(floor, getWidth()/2, getHeight()/2);
         Player player = new Player();
         addObject(player,getWidth()/2,getHeight()/2 - 50);
+        Floor floor2 = new Floor();
+        addObject(floor2,688,744);
+        PlaceHolderEnemy placeHolderEnemy = new PlaceHolderEnemy();
+        addObject(placeHolderEnemy,573,692);
     }
 }

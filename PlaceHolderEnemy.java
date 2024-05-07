@@ -14,10 +14,12 @@ public class PlaceHolderEnemy extends Enemy
      */
     public PlaceHolderEnemy()
     {
-        super(1,1,1);
+        super(1,1,5);
     }
     public void act()
     {
-        // Add your action code here.
+        setOriginalPosition();
+        wander();
+        debugHud();
     }
 }
