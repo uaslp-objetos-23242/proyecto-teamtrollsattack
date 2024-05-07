@@ -14,10 +14,12 @@ public class MountainTroll extends Enemy
      */
     public MountainTroll()
     {
-        super(1,1,1);
+        super(5,3,1);
     }
+
     public void act()
     {
-        // Add your action code here.
+        setOriginalPosition();
+        wander();
     }
 }

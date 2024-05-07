@@ -65,7 +65,6 @@ public abstract class Entity extends Actor
     {
         this.health--;
     }
-
-    //Metodo abstracto para moverse
-    public abstract void slideAround();
+    
+    public abstract void debugHud();
 }
