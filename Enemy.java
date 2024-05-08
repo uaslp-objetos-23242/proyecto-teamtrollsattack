@@ -1,12 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.List;
 /**
  * Write a description of class Enemy here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Enemy extends Entity
+public abstract class Enemy extends Entity
 {
     /**
      * Act - do whatever the Enemy wants to do. This method is called whenever
@@ -14,9 +14,12 @@ public class Enemy extends Entity
      */
     //Si es jefe, tebdra atributos especiales como daño y vida aumentados
     private boolean isBoss;
-    
+
+    protected boolean isPlayerInSight = false;
+
     private int originalXPos = -1;
     private int originalYPos = -1;
+
     public Enemy(int health, int damageDealt, int speed)
     {
         // Salud, daño causado, velocidad
@@ -30,12 +33,35 @@ public class Enemy extends Entity
 
     public void wander()
     {
-        setLocation(getX() + speed, getY());
-        if(getX() == originalXPos - 100 || getX() == originalXPos + 100)
+        lookingForPlayer();
+        if(!isPlayerInSight)
         {
-            speed *= -1;
+            setLocation(getX() + speed, getY());
+            if(getX() == originalXPos - 100 || getX() == originalXPos + 100)
+            {
+                speed *= -1;
+            }
+            setRotation(0);
         }
+        else
+            engage();
     }
+    
+    public abstract void engage();
+
+    public void lookingForPlayer()
+    {
+        if(playerIsNearby())
+            isPlayerInSight = true;
+        else 
+            isPlayerInSight = false;
+    }
+
+    public boolean playerIsNearby()
+    {
+        return !getObjectsInRange(200, Player.class).isEmpty();
+    }
+
     public void setOriginalPosition()
     {
         if(originalXPos == -1 || originalYPos == -1)
@@ -64,10 +90,12 @@ public class Enemy extends Entity
 
         }
     }
-    
+
     public void debugHud()
     {
         getWorld().showText("X pos: " + getX(), 700, 50);
         getWorld().showText("Y pos: " + getY(), 700, 70);
+        getWorld().showText("Player nerby: " + playerIsNearby(), 700, 90);
     }
+    
 }
