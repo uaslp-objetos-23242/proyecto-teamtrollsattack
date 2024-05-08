@@ -17,6 +17,7 @@ public abstract class Enemy extends Entity
 
     //Si el jugador se encuentra en el radio del enemigo
     protected boolean isPlayerInSight = false;
+    protected boolean isPlayerAtLeft;
 
     //Guarda las posiciones originales de los enemigos para que patrullen al rededor
     private int originalXPos = -1;
@@ -66,6 +67,17 @@ public abstract class Enemy extends Entity
             isPlayerInSight = true;
         else 
             isPlayerInSight = false;
+    }
+    
+    /**
+     * Revisa si el jugador esta a la derecha o a la izquierda en base a su posicion
+     */
+    public void checkForPlayerAtLeft()
+    {
+        if(getPlayerInfo().getX() - getX() <= 0)
+            isPlayerAtLeft = true;
+        else
+            isPlayerAtLeft = false;
     }
 
     /**
@@ -121,6 +133,7 @@ public abstract class Enemy extends Entity
         getWorld().showText("Y pos: " + getY(), 700, 70);
         getWorld().showText("Player nerby: " + playerIsNearby(), 700, 90);
         getWorld().showText("Distance from player: " + (getPlayerInfo().getX() - getX()), 700, 110);
+        getWorld().showText("Player at left: " + isPlayerAtLeft, 700, 110);
     }
 
 }

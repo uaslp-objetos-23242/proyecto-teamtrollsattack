@@ -20,6 +20,7 @@ public class PlaceHolderEnemy extends Enemy
     public void act()
     {
         setOriginalPosition();
+        checkForPlayerAtLeft();
         wander();
         debugHud();
     }
