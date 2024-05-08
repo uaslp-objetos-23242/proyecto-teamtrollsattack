@@ -325,9 +325,5 @@ public class Player extends Entity
         getWorld().showText("X pos: " + getX(), 350, 50);
         getWorld().showText("Y pos: " + getY(), 350, 70);
     }
-    
-    public int getHealth()
-    {
-        return this.health;
-    }
+
 }

@@ -16,13 +16,14 @@ public class PlaceHolderEnemy extends Enemy
     {
         super(1,1,5);
     }
+
     public void act()
     {
         setOriginalPosition();
         wander();
         debugHud();
     }
-    
+
     public void engage()
     {
         setRotation(270);

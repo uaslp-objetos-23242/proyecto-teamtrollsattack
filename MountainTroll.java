@@ -22,9 +22,9 @@ public class MountainTroll extends Enemy
         setOriginalPosition();
         wander();
     }
-    
+
     public void engage()
     {
-        
+
     }
 }

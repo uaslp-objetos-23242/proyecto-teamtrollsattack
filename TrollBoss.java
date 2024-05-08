@@ -16,12 +16,14 @@ public class TrollBoss extends Enemy
     {
         super(1,1,1);
     }
+
     public void act()
     {
         // Add your action code here.
     }
+
     public void engage()
     {
-        
+
     }
 }
