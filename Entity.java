@@ -1,7 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Entity here.
+ * Esta clase engloba todos los metodos y variables que tienen en comun algunos actores
+ * Principalmente Player y Enemy
  * 
  * @author (your name) 
  * @version (a version number or a date)
@@ -29,21 +30,31 @@ public abstract class Entity extends Actor
     {
 
     }
-    
+
+    /**
+     * Reescala la imagen para hacerla mas pequeña
+     */
     public void scaleDownImage(int horizontalScaleDown, int verticalScaleDown)
     {
         getImage().scale(getImage().getWidth()/horizontalScaleDown, getImage().getHeight()/verticalScaleDown);
     }
-    
+
+    /**
+     * Reescala la imagen para hacerla mas grande
+     */
     public void scaleUpImage(int horizontalScaleDown, int verticalScaleDown)
     {
         getImage().scale(getImage().getWidth() * horizontalScaleDown, getImage().getHeight() * verticalScaleDown);
     }
 
-    //Nivela a todos al ras del suelo
+    /**
+     * Nivela a todos al ras del suelo
+     */
     public abstract void nivelateOnFloor();
 
-    //Checa si el personaje esta tocando el suelo
+    /**
+     * Checa si el personaje esta tocando el suelo
+     */
     public boolean isOnFloor()
     {
         if(isTouching(Floor.class))
@@ -55,16 +66,9 @@ public abstract class Entity extends Actor
             return false;
         }
     }
-    //Regresa la salud
-    public int getHealth()
-    {
-        return this.health;
-    }
-    
-    public void setHealth()
-    {
-        this.health--;
-    }
-    
+
+    /**
+     * Muestra informacion oculta en pantalla para debugear
+     */
     public abstract void debugHud();
 }

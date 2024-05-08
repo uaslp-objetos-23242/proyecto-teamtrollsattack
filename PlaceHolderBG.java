@@ -20,7 +20,7 @@ public class PlaceHolderBG extends World
         //getBackground().scale(getBackground().getWidth()/2, getBackground().getHeight()/2);
         prepare();
     }
-    
+
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.

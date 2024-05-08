@@ -13,10 +13,12 @@ public abstract class Enemy extends Entity
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     //Si es jefe, tebdra atributos especiales como daño y vida aumentados
-    private boolean isBoss;
+    private boolean isBoss = false;
 
+    //Si el jugador se encuentra en el radio del enemigo
     protected boolean isPlayerInSight = false;
 
+    //Guarda las posiciones originales de los enemigos para que patrullen al rededor
     private int originalXPos = -1;
     private int originalYPos = -1;
 
@@ -31,6 +33,9 @@ public abstract class Enemy extends Entity
         // Add your action code here.
     }
 
+    /**
+     * Hace que el objeto de la clase se mueva de un lado a otro en un rango determinado
+     */
     public void wander()
     {
         lookingForPlayer();
@@ -46,9 +51,15 @@ public abstract class Enemy extends Entity
         else
             engage();
     }
-    
+
+    /**
+     * Inicia el combate con el jugador, cada subclase de enemigo ataca diferente
+     */
     public abstract void engage();
 
+    /**
+     * Regresa true si el jugador esta cerca y false si no
+     */
     public void lookingForPlayer()
     {
         if(playerIsNearby())
@@ -57,11 +68,25 @@ public abstract class Enemy extends Entity
             isPlayerInSight = false;
     }
 
+    /**
+     * Revisa si el jugador se encuentra en un radio determinado
+     */
     public boolean playerIsNearby()
     {
         return !getObjectsInRange(200, Player.class).isEmpty();
     }
 
+    /**
+     * Adquiere una copia del jugador para obtener datos relevantes
+     */
+    public Player getPlayerInfo()
+    {
+        return getWorld().getObjects(Player.class).get(0);
+    }
+
+    /**
+     * Almacena la posicion original del enemigo
+     */
     public void setOriginalPosition()
     {
         if(originalXPos == -1 || originalYPos == -1)
@@ -72,7 +97,6 @@ public abstract class Enemy extends Entity
 
     }
 
-    //Nivela a todos al ras del suelo, heredado de Entity
     public void nivelateOnFloor()
     {
         int x = getX();
@@ -83,12 +107,12 @@ public abstract class Enemy extends Entity
         }
     }
 
+    /**
+     * Elimina al enemigo del mundo al perder toda su salud
+     */
     public void despawnOnDeath()
     {
-        if(getHealth() <= 0)
-        {
 
-        }
     }
 
     public void debugHud()
@@ -96,6 +120,7 @@ public abstract class Enemy extends Entity
         getWorld().showText("X pos: " + getX(), 700, 50);
         getWorld().showText("Y pos: " + getY(), 700, 70);
         getWorld().showText("Player nerby: " + playerIsNearby(), 700, 90);
+        getWorld().showText("Distance from player: " + (getPlayerInfo().getX() - getX()), 700, 110);
     }
-    
+
 }
