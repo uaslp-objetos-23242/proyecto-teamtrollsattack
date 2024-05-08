@@ -27,11 +27,10 @@ public class PlaceHolderBG extends World
      */
     private void prepare()
     {
-
-        Floor floor = new Floor();
-        addObject(floor, getWidth()/2, getHeight()/2);
         Player player = new Player();
         addObject(player,getWidth()/2,getHeight()/2 - 50);
+        Floor floor = new Floor();
+        addObject(floor, getWidth()/2, getHeight()/2);
         Floor floor2 = new Floor();
         addObject(floor2,688,744);
         PlaceHolderEnemy placeHolderEnemy = new PlaceHolderEnemy();

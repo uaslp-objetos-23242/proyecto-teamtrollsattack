@@ -20,4 +20,9 @@ public class rock extends Enemy
     {
         // Add your action code here.
     }
+    
+    public void engage()
+    {
+        //Nomas existe y ya
+    }
 }

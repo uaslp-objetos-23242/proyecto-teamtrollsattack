@@ -22,4 +22,10 @@ public class PlaceHolderEnemy extends Enemy
         wander();
         debugHud();
     }
+    
+    public void engage()
+    {
+        setRotation(270);
+    }
 }
+
