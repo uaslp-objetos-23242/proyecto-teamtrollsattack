@@ -18,7 +18,7 @@ public class Player extends Entity
     // Puntos de experiencia para mejorar sus atributos
     private int expPoints;
     // Altura maxima que puede saltar
-    private int jumpHeight = 100;
+    private int jumpHeight = -20;
     // Gravedad del jugador
     private int gravity = 0;
     // Sirve para llevar un flujo mas manejable de la gravedad y algunos temporizadores
@@ -59,14 +59,11 @@ public class Player extends Entity
     public void act()
     {
         playBackgroundMusic();
+        checkFalling();
         debugHud();
         hud();
-        nivelateOnFloor();
-        increaseGravity();
         count++;
         slideAround();
-        fall();
-        jump();
         attack();
         useShield();
         if(playerInvincible)
@@ -79,7 +76,7 @@ public class Player extends Entity
     }
 
     /**
-     * Movimiento casual, izquierda y derecha
+     * Movimiento casual, izquierda, derecha y ademas saltar
      * Obtiene la posicion del personaje y le agrega o resta valor a x para moverse
      */
     public void slideAround()
@@ -98,55 +95,15 @@ public class Player extends Entity
             facingLeft = true;
             moveAnimation();
         }
-    }
-
-    /**
-     * Hace que el jugador caiga por gravedad
-     * El count y * 9 en gravity es para tratar de nivelar una caida lenta
-     */
-    public void fall()
-    {
-        if(!isOnFloor() && count % 2 == 0)
-            setLocation(getX(), getY() + gravity * 9);
-        else
-            gravity = 0;
-    }
-
-    /**
-     * Saltar al presionar espacio
-     * Antes de saltar revisa que la tecla espacio no este ya presionada y que el personaje este en el suelo
-     */
-    public void jump()
-    {
-        if(Greenfoot.isKeyDown("space") && !jumpPressed && isOnFloor())
+        if(Greenfoot.isKeyDown("space") && !usingShield && !attackAnimation && !jumpPressed && onGround())
         {
-            setLocation(getX(), getY() - jumpHeight);
+            vSpeed = jumpHeight;
+            fall();
             jumpPressed = true;
         }
         if(!Greenfoot.isKeyDown("space"))
-            jumpPressed = false;
-    }
-
-    /**
-     * La gravedad  no puede ser mayor a 20 y solo afecta cuando no esta tocando el suelo
-     */
-    public void increaseGravity()
-    {
-        if(gravity < 20 && !isOnFloor())
-            gravity++;
-    }
-
-    /**
-     * Nivela a todos al ras del suelo
-     * heredado de forma abstracta de Entity
-     */
-    public void nivelateOnFloor()
-    {
-        int x = getX();
-        int y = getY();
-        if(isOnFloor())
         {
-            setLocation(x, y - gravity);
+            jumpPressed = false;
         }
     }
 
@@ -156,7 +113,7 @@ public class Player extends Entity
      */
     public void attack()
     {
-        if(Greenfoot.isKeyDown("j") && !attackOnCooldown && !attackPressed && !attackAnimation && isOnFloor())
+        if(Greenfoot.isKeyDown("j") && !attackOnCooldown && !attackPressed && !attackAnimation && onGround())
         {
             if(facingLeft)
             {
@@ -232,10 +189,9 @@ public class Player extends Entity
      */
     public boolean isDamaged()
     {
-        if(isTouching(Enemy.class))
-        {
+        Actor attacker = getOneObjectAtOffset(0, 0, Enemy.class);
+        if(attacker != null)
             return true;
-        }
         else
             return false;
     }
@@ -321,12 +277,15 @@ public class Player extends Entity
         getWorld().showText("Invincibility timer: " + invincibilityFrames, 200, 50);
         getWorld().showText("Invincibility: " + usingShield, 200, 70);
         getWorld().showText("Facing left: " + facingLeft, 200, 90);
-        getWorld().showText("On floor: " + isOnFloor(), 200, 110);
+        getWorld().showText("On floor: " + onGround(), 200, 110);
         getWorld().showText("Current gravity: " + gravity, 200, 130);
         getWorld().showText("X pos: " + getX(), 350, 50);
         getWorld().showText("Y pos: " + getY(), 350, 70);
     }
 
+    /**
+     * Getters para uso externo a la clase
+     */
     public boolean getAttackAnimation()
     {
         return attackAnimation;
