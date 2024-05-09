@@ -19,6 +19,8 @@ public abstract class Entity extends Actor
     protected int damageDealt;
     protected int speed;
     
+    GreenfootSound covenantDance = new GreenfootSound("Covenant Dance.mp3");
+    
     //Estado de la entidad, vivo o muerto, no creo se ocupe pero por si acaso
     protected boolean isAlive;
 
@@ -32,7 +34,7 @@ public abstract class Entity extends Actor
 
     public void act()
     {
-
+        
     }
 
     /**
@@ -69,6 +71,12 @@ public abstract class Entity extends Actor
         {
             return false;
         }
+    }
+    
+    public void playBackgroundMusic()
+    {
+        covenantDance.setVolume(30);
+        covenantDance.playLoop();
     }
 
     /**
