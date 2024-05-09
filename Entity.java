@@ -21,6 +21,9 @@ public abstract class Entity extends Actor
     
     GreenfootSound covenantDance = new GreenfootSound("Covenant Dance.mp3");
     
+    protected int vSpeed = 0;
+    protected int acceleration = 1;
+    
     //Estado de la entidad, vivo o muerto, no creo se ocupe pero por si acaso
     protected boolean isAlive;
 
@@ -52,27 +55,39 @@ public abstract class Entity extends Actor
     {
         getImage().scale(getImage().getWidth() * horizontalScaleDown, getImage().getHeight() * verticalScaleDown);
     }
-
+    
     /**
-     * Nivela a todos al ras del suelo
+     * Inicia la caida al no estar tocando el suelo
      */
-    public abstract void nivelateOnFloor();
-
-    /**
-     * Checa si el personaje esta tocando el suelo
-     */
-    public boolean isOnFloor()
+    public void checkFalling()
     {
-        if(isTouching(Floor.class))
-        {
-            return true;
-        }
+        if(!onGround())
+            fall();
         else
-        {
-            return false;
-        }
+            vSpeed = 0;
     }
     
+    /**
+     * Hace caer a los objetos
+     */
+    public void fall()
+    {
+        setLocation(getX(), getY() + vSpeed);
+        vSpeed += acceleration;
+    }
+    
+    /**
+     * Revisa si esta tocando el suelo
+     */
+    public boolean onGround()
+    {
+        Actor under = getOneObjectAtOffset(0, getImage().getHeight()/2, Floor.class);
+        return under != null;
+    }
+    
+    /**
+     * Reproduce musica de fondo
+     */
     public void playBackgroundMusic()
     {
         covenantDance.setVolume(30);

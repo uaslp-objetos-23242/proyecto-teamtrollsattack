@@ -109,16 +109,6 @@ public abstract class Enemy extends Entity
 
     }
 
-    public void nivelateOnFloor()
-    {
-        int x = getX();
-        int y = getY();
-        if(isOnFloor())
-        {
-            setLocation(x, y - 1);
-        }
-    }
-
     /**
      * Elimina al enemigo del mundo al perder toda su salud
      */
