@@ -326,4 +326,8 @@ public class Player extends Entity
         getWorld().showText("Y pos: " + getY(), 350, 70);
     }
 
+    public boolean getAttackAnimation()
+    {
+        return attackAnimation;
+    }
 }

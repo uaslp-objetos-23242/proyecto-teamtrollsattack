@@ -68,7 +68,7 @@ public abstract class Enemy extends Entity
         else 
             isPlayerInSight = false;
     }
-    
+
     /**
      * Revisa si el jugador esta a la derecha o a la izquierda en base a su posicion
      */
@@ -124,7 +124,20 @@ public abstract class Enemy extends Entity
      */
     public void despawnOnDeath()
     {
+        scaleDownImage(20, 20);
+        setLocation(0, 0);
+    }
 
+    public void getDamaged()
+    {   
+        Actor player = getOneObjectAtOffset(0, 0, Player.class);
+        if(player != null && getPlayerInfo().getAttackAnimation() && this.health > 0)
+            this.health--;
+        if(this.health < 1)
+        {
+            isAlive = false;
+            despawnOnDeath();
+        }
     }
 
     public void debugHud()
@@ -133,7 +146,8 @@ public abstract class Enemy extends Entity
         getWorld().showText("Y pos: " + getY(), 700, 70);
         getWorld().showText("Player nerby: " + playerIsNearby(), 700, 90);
         getWorld().showText("Distance from player: " + (getPlayerInfo().getX() - getX()), 700, 110);
-        getWorld().showText("Player at left: " + isPlayerAtLeft, 700, 110);
+        getWorld().showText("Player at left: " + isPlayerAtLeft, 700, 130);
+        getWorld().showText("Enemy health: " + this.health, 700, 150);
     }
 
 }

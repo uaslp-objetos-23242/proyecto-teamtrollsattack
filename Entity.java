@@ -18,12 +18,16 @@ public abstract class Entity extends Actor
     protected int health;
     protected int damageDealt;
     protected int speed;
+    
+    //Estado de la entidad, vivo o muerto, no creo se ocupe pero por si acaso
+    protected boolean isAlive;
 
     public Entity(int health, int damageDealt, int speed)
     {
         this.health = health;
         this.damageDealt = damageDealt;
         this.speed = speed;
+        this.isAlive = true;
     }
 
     public void act()

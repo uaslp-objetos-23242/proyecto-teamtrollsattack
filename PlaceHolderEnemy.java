@@ -19,10 +19,14 @@ public class PlaceHolderEnemy extends Enemy
 
     public void act()
     {
-        setOriginalPosition();
-        checkForPlayerAtLeft();
-        wander();
-        debugHud();
+        if(isAlive)
+        {
+            setOriginalPosition();
+            checkForPlayerAtLeft();
+            wander();
+            getDamaged();
+            debugHud();
+        }
     }
 
     public void engage()
