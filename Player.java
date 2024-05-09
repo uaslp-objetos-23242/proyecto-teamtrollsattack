@@ -58,6 +58,7 @@ public class Player extends Entity
 
     public void act()
     {
+        playBackgroundMusic();
         debugHud();
         hud();
         nivelateOnFloor();

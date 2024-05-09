@@ -14,7 +14,7 @@ public class PlaceHolderEnemy extends Enemy
      */
     public PlaceHolderEnemy()
     {
-        super(1,1,5);
+        super(3,1,5);
     }
 
     public void act()
