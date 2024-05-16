@@ -15,7 +15,7 @@ public class Floor extends Actor
     // El suelo sirve para nivelar a los personajes
     public Floor()
     {
-        getImage().scale(getImage().getWidth()*6, getImage().getHeight()/3);
+        getImage().scale(getImage().getWidth()*6, getImage().getHeight()/5);
     }
 
     public void act()

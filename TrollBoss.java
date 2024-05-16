@@ -14,12 +14,18 @@ public class TrollBoss extends Enemy
      */
     public TrollBoss()
     {
-        super(1,1,1);
+        super(3,1,5);
     }
 
     public void act()
     {
-        // Add your action code here.
+        if(isAlive)
+        {
+            checkFalling();
+            checkForPlayerAtLeft();
+            wander(200, 200, 200);
+            getDamaged();  
+        }
     }
 
     public void engage()
