@@ -19,11 +19,42 @@ public class RangerTroll extends Enemy
 
     public void act()
     {
-        // Add your action code here.
+        setOriginalPosition();
+        checkFalling();
+        wander();
+        checkForPlayerAtLeft();
+        cambiaSprite();
+        if(this.mun>0)
+        {
+            Dispara();
+        }
+        
+        if(10000%10==0)
+        {
+            Recargar();
+        }
     }
 
     public void engage()
     {
 
+    }
+
+    public void Dispara()
+    {
+        getWorld().addObject(new rock(), getX(), getY());
+        mun --;
+    }
+    
+    public void cambiaSprite()
+    {
+        if(isPlayerAtLeft==true)
+        {
+            setImage("Troll_ranger3.png");
+        }
+        else
+        {
+            setImage("Troll_ranger2.png");
+        }
     }
 }

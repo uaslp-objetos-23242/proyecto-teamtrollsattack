@@ -26,7 +26,7 @@ public abstract class Entity extends Actor
     
     //Estado de la entidad, vivo o muerto, no creo se ocupe pero por si acaso
     protected boolean isAlive;
-
+    protected int cont2;
     public Entity(int health, int damageDealt, int speed)
     {
         this.health = health;

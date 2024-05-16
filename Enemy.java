@@ -8,6 +8,7 @@ import java.util.List;
  */
 public abstract class Enemy extends Entity
 {
+    int mun, band;
     /**
      * Act - do whatever the Enemy wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -25,13 +26,15 @@ public abstract class Enemy extends Entity
 
     public Enemy(int health, int damageDealt, int speed)
     {
-        // Salud, daño causado, velocidad
         super(health,damageDealt,speed);
+        int band=0, cont=0;
+        // Salud, daño causado, velocidad
+        
     }
 
     public void act()
     {
-        // Add your action code here.
+        
     }
 
     /**
@@ -50,6 +53,7 @@ public abstract class Enemy extends Entity
             setRotation(0);
         }
         else
+
             engage();
     }
 
@@ -139,5 +143,12 @@ public abstract class Enemy extends Entity
         getWorld().showText("Player at left: " + isPlayerAtLeft, 700, 130);
         getWorld().showText("Enemy health: " + this.health, 700, 150);
     }
-
+    
+    public void Recargar()
+    {
+        if (this.mun<1&&cont2%100==0)
+            this.mun=1;
+        cont2++;
+    }
 }
+    

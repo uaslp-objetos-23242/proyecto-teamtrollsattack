@@ -35,5 +35,8 @@ public class PlaceHolderBG extends World
         addObject(floor2,688,744);
         PlaceHolderEnemy placeHolderEnemy = new PlaceHolderEnemy();
         addObject(placeHolderEnemy,573,692);
+        player.setLocation(353,392);
+        RangerTroll rangerTroll = new RangerTroll();
+        addObject(rangerTroll,925,365);
     }
 }
