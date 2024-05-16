@@ -24,7 +24,7 @@ public class PlaceHolderEnemy extends Enemy
             setOriginalPosition();
             checkFalling();
             checkForPlayerAtLeft();
-            wander();
+            wander(500, 500);
             getDamaged();
             debugHud();
         }
