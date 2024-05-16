@@ -40,13 +40,14 @@ public abstract class Enemy extends Entity
     /**
      * Hace que el objeto de la clase se mueva de un lado a otro en un rango determinado
      */
-    public void wander()
+    public void wander(int maxLeftDistance, int maxRightDistance, int detectionRange)
     {
-        lookingForPlayer();
+        setOriginalPosition();
+        lookingForPlayer(detectionRange);
         if(!isPlayerInSight)
         {
             setLocation(getX() + speed, getY());
-            if(getX() == originalXPos - 100 || getX() == originalXPos + 100)
+            if(getX() == originalXPos - maxLeftDistance || getX() == originalXPos + maxRightDistance || isAtEdge())
             {
                 speed *= -1;
             }
@@ -65,9 +66,9 @@ public abstract class Enemy extends Entity
     /**
      * Regresa true si el jugador esta cerca y false si no
      */
-    public void lookingForPlayer()
+    public void lookingForPlayer(int detectionRange)
     {
-        if(playerIsNearby())
+        if(playerIsNearby(detectionRange))
             isPlayerInSight = true;
         else 
             isPlayerInSight = false;
@@ -87,9 +88,9 @@ public abstract class Enemy extends Entity
     /**
      * Revisa si el jugador se encuentra en un radio determinado
      */
-    public boolean playerIsNearby()
+    public boolean playerIsNearby(int detectionRange)
     {
-        return !getObjectsInRange(200, Player.class).isEmpty();
+        return !getObjectsInRange(detectionRange, Player.class).isEmpty();
     }
 
     /**
@@ -138,10 +139,12 @@ public abstract class Enemy extends Entity
     {
         getWorld().showText("X pos: " + getX(), 700, 50);
         getWorld().showText("Y pos: " + getY(), 700, 70);
-        getWorld().showText("Player nerby: " + playerIsNearby(), 700, 90);
+        //getWorld().showText("Player nerby: " + playerIsNearby(200), 700, 90);
         getWorld().showText("Distance from player: " + (getPlayerInfo().getX() - getX()), 700, 110);
         getWorld().showText("Player at left: " + isPlayerAtLeft, 700, 130);
         getWorld().showText("Enemy health: " + this.health, 700, 150);
+        getWorld().showText("Original X pos: " + originalXPos, 900, 130);
+        getWorld().showText("Original Y pos: " + originalYPos, 900, 150);
     }
     
     public void Recargar()
