@@ -19,8 +19,13 @@ public class MountainTroll extends Enemy
 
     public void act()
     {
-        setOriginalPosition();
-        wander(100, 100, 200);
+        if(isAlive)
+        {
+            checkFalling();
+            checkForPlayerAtLeft();
+            wander(200, 200, 200);
+            getDamaged();  
+        }
     }
 
     public void engage()
