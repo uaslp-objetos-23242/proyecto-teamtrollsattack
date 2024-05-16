@@ -20,7 +20,7 @@ public class MountainTroll extends Enemy
     public void act()
     {
         setOriginalPosition();
-        wander(100, 100);
+        wander(100, 100, 200);
     }
 
     public void engage()
