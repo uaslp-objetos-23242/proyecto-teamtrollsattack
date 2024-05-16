@@ -39,6 +39,7 @@ public abstract class Enemy extends Entity
      */
     public void wander(int maxLeftDistance, int maxRightDistance, int detectionRange)
     {
+        setOriginalPosition();
         lookingForPlayer(detectionRange);
         if(!isPlayerInSight)
         {
