@@ -37,13 +37,13 @@ public abstract class Enemy extends Entity
     /**
      * Hace que el objeto de la clase se mueva de un lado a otro en un rango determinado
      */
-    public void wander()
+    public void wander(int maxLeftDistance, int maxRightDistance)
     {
         lookingForPlayer();
         if(!isPlayerInSight)
         {
             setLocation(getX() + speed, getY());
-            if(getX() == originalXPos - 100 || getX() == originalXPos + 100)
+            if(getX() == originalXPos - maxLeftDistance || getX() == originalXPos + maxRightDistance || isAtEdge())
             {
                 speed *= -1;
             }
@@ -138,6 +138,8 @@ public abstract class Enemy extends Entity
         getWorld().showText("Distance from player: " + (getPlayerInfo().getX() - getX()), 700, 110);
         getWorld().showText("Player at left: " + isPlayerAtLeft, 700, 130);
         getWorld().showText("Enemy health: " + this.health, 700, 150);
+        getWorld().showText("Original X pos: " + originalXPos, 900, 130);
+        getWorld().showText("Original Y pos: " + originalYPos, 900, 150);
     }
 
 }
