@@ -53,7 +53,7 @@ public class Player extends Entity
         super(3,1,5);
         this.armorPoints = 2;
         this.expPoints = 0;
-        //scaleDownImage(2, 2);
+        scaleDownImage(2, 2);
     }
 
     public void act()
