@@ -90,7 +90,10 @@ public abstract class Enemy extends Entity
      */
     public boolean playerIsNearby(int detectionRange)
     {
-        return !getObjectsInRange(detectionRange, Player.class).isEmpty();
+        if(!getObjectsInRange(detectionRange, Player.class).isEmpty() && (getPlayerInfo().getY() >= getY() - 165 && getPlayerInfo().getY() <= getY() + 165))
+            return true;
+        else
+            return false;
     }
 
     /**
