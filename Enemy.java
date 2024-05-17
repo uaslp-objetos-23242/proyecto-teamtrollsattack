@@ -21,8 +21,8 @@ public abstract class Enemy extends Entity
     protected boolean isPlayerAtLeft;
 
     //Guarda las posiciones originales de los enemigos para que patrullen al rededor
-    private int originalXPos = -1;
-    private int originalYPos = -1;
+    protected int originalXPos = -1;
+    protected int originalYPos = -1;
 
     public Enemy(int health, int damageDealt, int speed)
     {
@@ -122,14 +122,14 @@ public abstract class Enemy extends Entity
      */
     public void despawnOnDeath()
     {
-        scaleDownImage(20, 20);
+        getImage().scale(1,1);
         setLocation(0, 0);
     }
 
     public void getDamaged()
     {   
         Actor player = getOneObjectAtOffset(0, 0, Player.class);
-        if(player != null && getPlayerInfo().getAttackAnimation() && this.health > 0)
+        if(player != null && getPlayerInfo().getAttackAnimation() && this.health >= 1)
             this.health--;
         if(this.health < 1)
         {
