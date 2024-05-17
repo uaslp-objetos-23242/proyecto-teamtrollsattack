@@ -15,15 +15,21 @@ public class RangerTroll extends Enemy
     public RangerTroll()
     {
         super(1,1,1);
+        scaleDownImage(2, 2);
     }
 
     public void act()
     {
-        setOriginalPosition();
-        checkFalling();
-        wander(50,50,500);
-        checkForPlayerAtLeft();
-        cambiaSprite();
+        if(isAlive)
+        {
+            setOriginalPosition();
+            checkFalling();
+            getDamaged();
+            wander(50,50,500);
+            checkForPlayerAtLeft();
+            cambiaSprite();
+            debugHud();
+        }
     }
 
     public void engage()
@@ -50,10 +56,12 @@ public class RangerTroll extends Enemy
         if(isPlayerAtLeft==true && isPlayerInSight)
         {
             setImage("Troll_ranger3.png");
+            scaleDownImage(2, 2);
         }
         else
         {
             setImage("Troll_ranger2.png");
+            scaleDownImage(2, 2);
         }
     }
 }
