@@ -21,31 +21,30 @@ public class RangerTroll extends Enemy
     {
         setOriginalPosition();
         checkFalling();
-        wander();
+        wander(50,50,500);
         checkForPlayerAtLeft();
         cambiaSprite();
+    }
+
+    public void engage()
+    {
         if(this.mun>0)
         {
             Dispara();
         }
-        
+
         if(10000%10==0)
         {
             Recargar();
         }
     }
 
-    public void engage()
-    {
-
-    }
-
     public void Dispara()
     {
-        getWorld().addObject(new rock(), getX(), getY());
+        getWorld().addObject(new Rock(), getX(), getY());
         mun --;
     }
-    
+
     public void cambiaSprite()
     {
         if(isPlayerAtLeft==true)
