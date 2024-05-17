@@ -47,7 +47,7 @@ public class RangerTroll extends Enemy
 
     public void cambiaSprite()
     {
-        if(isPlayerAtLeft==true)
+        if(isPlayerAtLeft==true && isPlayerInSight)
         {
             setImage("Troll_ranger3.png");
         }
