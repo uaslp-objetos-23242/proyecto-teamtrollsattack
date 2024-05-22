@@ -32,23 +32,39 @@ public class TrollBoss extends Enemy
 
     public void engage()
     {
-        spawnSlash();
+        spawnRockRain();
         if(rockRainSpawnOnCooldown)
-            slashSpawnDelay();
+            rockRainSpawnDelay();
     }
-    
-    public void spawnSlash()
+
+    public void spawnRockRain()
     {
         if(!rockRainSpawnOnCooldown)
         {
-            getWorld().addObject(new Rock(), getX(), getY() + getImage().getHeight()/2);
-            getWorld().addObject(new Rock(), getX(), getY() + getImage().getHeight()/2);
-            getWorld().addObject(new Rock(), getX(), getY() + getImage().getHeight()/2);
-            rockRainSpawnOnCooldown = true;
+            if(isPlayerAtLeft)
+            {
+                getWorld().addObject(new Stalactite(), getX() - 100, getY() + getImage().getHeight() * -1);
+                getWorld().addObject(new Stalactite(), getX() - 120, getY() + getImage().getHeight() * -1);
+                getWorld().addObject(new Stalactite(), getX() - 140, getY() + getImage().getHeight() * -1);
+                getWorld().addObject(new Stalactite(), getX() - 160, getY() + getImage().getHeight() * -1);
+                getWorld().addObject(new Stalactite(), getX() - 180, getY() + getImage().getHeight() * -1);
+                getWorld().addObject(new Stalactite(), getX() - 200, getY() + getImage().getHeight() * -1);
+                rockRainSpawnOnCooldown = true;
+            }
+            else
+            {
+                getWorld().addObject(new Stalactite(), getX() + 100, getY() + getImage().getHeight() * -1);
+                getWorld().addObject(new Stalactite(), getX() + 120, getY() + getImage().getHeight() * -1);
+                getWorld().addObject(new Stalactite(), getX() + 140, getY() + getImage().getHeight() * -1);
+                getWorld().addObject(new Stalactite(), getX() + 160, getY() + getImage().getHeight() * -1);
+                getWorld().addObject(new Stalactite(), getX() + 180, getY() + getImage().getHeight() * -1);
+                getWorld().addObject(new Stalactite(), getX() + 200, getY() + getImage().getHeight() * -1);
+                rockRainSpawnOnCooldown = true;
+            }
         }
     }
 
-    public void slashSpawnDelay()
+    public void rockRainSpawnDelay()
     {
         rockRainSpawnDelayCounter--;
         if(rockRainSpawnDelayCounter == 0)
