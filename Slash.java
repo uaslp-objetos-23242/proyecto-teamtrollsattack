@@ -1,44 +1,40 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Shockwave here.
+ * Write a description of class Slash here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Shockwave extends Projectile
+public class Slash extends Projectile
 {
     /**
-     * Act - do whatever the Shockwave wants to do. This method is called whenever
+     * Act - do whatever the Slash wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private boolean moveLeft;
 
-    public Shockwave(boolean moveLeft)
-    {
-        this.moveLeft = moveLeft;
-    }
+    public Slash(){}
 
     public void act()
     {
         setOriginalPosition();
-        waveMovement();
-        despawnWaves();
+        slashMovement();
+        despawnSlash();
     }
 
-    public void waveMovement()
+    public void slashMovement()
     {
-        if(moveLeft)
+        if(isPlayerAtLeft)
         {    
-            move(-3);
+            move(5);
         }
         else
         {
-            move(3);
+            move(-5);
         }
     }
 
-    public void despawnWaves()
+    public void despawnSlash()
     {
         int maxDistance = 200;
         if(getX() == originalXPos - maxDistance || getX() == originalXPos + maxDistance || isAtEdge())
