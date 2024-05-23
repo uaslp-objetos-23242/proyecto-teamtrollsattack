@@ -43,7 +43,14 @@ public class Player extends Entity
     private boolean usingShield = false;
     // Checa la direccio que el personaje esta viendo, sirve para la direccion de los sprites
     private boolean facingLeft = false;
-
+    // Guarda y muestra el numero de mundo en el que se encuentra
+    private int actualWorld = 1;
+    // Mundos por si se ocupa algo
+    World1 w1 = new World1();
+    World2 w2 = new World2();
+    World3 w3 = new World3();
+    World4 w4 = new World4();
+    WorldFinal w5 = new WorldFinal();
     /**
      * Pos el constructor, que mas xd
      */
@@ -73,6 +80,7 @@ public class Player extends Entity
             playAttackAnimation();
         if(attackOnCooldown)
             attackDelay();
+        changeWorld();
     }
 
     /**
@@ -269,6 +277,33 @@ public class Player extends Entity
         getWorld().showText("armor: " + armorPoints, 50, 70);
     }
 
+    public void changeWorld()
+    {   Actor goalHole = getOneObjectAtOffset(0, 0, Goal.class);
+        if(goalHole != null)
+        {
+            switch(actualWorld)
+            {
+                case 1:
+                    w2.addPlayer(this);
+                    Greenfoot.setWorld(w2);
+                    break;
+                case 2:
+                    w3.addPlayer(this);
+                    Greenfoot.setWorld(w3);
+                    break;
+                case 3:
+                    w4.addPlayer(this);
+                    Greenfoot.setWorld(w4);
+                    break;
+                case 4:
+                    w5.addPlayer(this);
+                    Greenfoot.setWorld(w5);
+                    break;
+            }
+            actualWorld++;
+        }
+    }
+
     /**
      * Muestra informacion sobre variables para debuguear
      */
@@ -278,9 +313,28 @@ public class Player extends Entity
         getWorld().showText("Invincibility: " + usingShield, 200, 70);
         getWorld().showText("Facing left: " + facingLeft, 200, 90);
         getWorld().showText("On floor: " + onGround(), 200, 110);
-        getWorld().showText("Current gravity: " + gravity, 200, 130);
+        getWorld().showText("Player world: " + actualWorld, 200, 130);
+        getWorld().showText("Actual world ID: " + showWorldId(), 200, 150);
         getWorld().showText("X pos: " + getX(), 350, 50);
         getWorld().showText("Y pos: " + getY(), 350, 70);
+    }
+    
+    public int showWorldId()
+    {
+        switch(actualWorld)
+            {
+                case 1:
+                    return w1.getWorldId();
+                case 2:
+                    return w2.getWorldId();
+                case 3:
+                    return w3.getWorldId();
+                case 4:
+                    return w4.getWorldId();
+                case 5:
+                    return w5.getWorldId();
+            }
+        return 0;
     }
 
     /**
