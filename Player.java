@@ -60,7 +60,7 @@ public class Player extends Entity
         super(3,1,5);
         this.armorPoints = 2;
         this.expPoints = 0;
-        scaleDownImage(2, 2);
+        scaleDownImage(4, 4);
     }
 
     public void act()
@@ -125,13 +125,14 @@ public class Player extends Entity
         {
             if(facingLeft)
             {
-                setImage("Link_Ataca_Izquierda.png");
-                scaleDownImage(2, 2);
+                setImage("Hero_Attack.png");
+                getImage().mirrorHorizontally();
+                scaleDownImage(4, 4);
             }
             else
             {
-                setImage("Link_Ataca_Derecha.png");
-                scaleDownImage(2, 2);
+                setImage("Hero_Attack.png");
+                scaleDownImage(4, 4);
             }
             attackPressed = true;
             attackAnimation = true;
@@ -241,13 +242,14 @@ public class Player extends Entity
     {
         if(facingLeft)
         {
-            setImage("Link_Izquierda.png");
-            scaleDownImage(2, 2);
+            setImage("Hero.png");
+            getImage().mirrorHorizontally();
+            scaleDownImage(4, 4);
         }
         else
         {
-            setImage("Link_Derecha.png");
-            scaleDownImage(2, 2);
+            setImage("Hero.png");
+            scaleDownImage(4, 4);
         }
     }
 
@@ -258,13 +260,14 @@ public class Player extends Entity
     {
         if(facingLeft)
         {
-            setImage("Link_Escudo_Izquierda.png");
-            scaleDownImage(2, 2);
+            setImage("Hero_Shield.png");
+            getImage().mirrorHorizontally();
+            scaleDownImage(4, 4);
         }
         else
         {
-            setImage("Link_Escudo_Derecha.png");
-            scaleDownImage(2, 2);
+            setImage("Hero_Shield.png");
+            scaleDownImage(4, 4);
         }
     }
 

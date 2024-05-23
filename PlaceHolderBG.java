@@ -28,16 +28,8 @@ public class PlaceHolderBG extends World
      */
     private void prepare()
     {
-        Player player = new Player();
-        addObject(player, getWidth()/2 - 100, getHeight()/2 - 100);
-        Floor floor = new Floor();
-        addObject(floor, getWidth()/2, getHeight()/2);
-        Floor floor2 = new Floor();
-        addObject(floor2,688,744);
-        PlaceHolderEnemy placeHolderEnemy = new PlaceHolderEnemy();
-        addObject(placeHolderEnemy,573,692);
-        RangerTroll rangerTroll = new RangerTroll();
-        addObject(rangerTroll,925,365);
+        
+
     }
     
     public void addPlayer(Player player)

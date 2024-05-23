@@ -15,7 +15,7 @@ public class RangerTroll extends Enemy
     public RangerTroll()
     {
         super(1,1,1);
-        scaleDownImage(2, 2);
+        //scaleDownImage(2, 2);
     }
 
     public void act()
@@ -56,12 +56,13 @@ public class RangerTroll extends Enemy
         if(isPlayerAtLeft==true && isPlayerInSight)
         {
             setImage("Troll_ranger3.png");
-            scaleDownImage(2, 2);
+            //scaleDownImage(2, 2);
         }
         else
         {
-            setImage("Troll_ranger2.png");
-            scaleDownImage(2, 2);
+            setImage("Troll_ranger3.png");
+            getImage().mirrorHorizontally();
+            //scaleDownImage(2, 2);
         }
     }
 }
