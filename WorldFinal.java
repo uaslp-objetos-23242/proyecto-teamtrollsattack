@@ -9,13 +9,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class WorldFinal extends World
 {
 
+    private int worldId = 10;
+    GreenfootSound risaTrollBoss = new GreenfootSound("Risa_Troll_Boss.mp3");
+    private boolean risaYaActivada = false;
     /**
      * Constructor for objects of class WorldFinal.
-     * 
-     */
-    private int worldId = 10;
-    /**
-     * Constructor for objects of class World2Final.
      * 
      */
     public WorldFinal()
@@ -23,8 +21,15 @@ public class WorldFinal extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1); 
         prepare();
+        risaTrollBoss.setVolume(80);
     }
     
+    public void act()
+    {
+        if(!risaYaActivada)
+            risa();
+    }
+
     private void prepare()
     {
         setPaintOrder(Player.class, Enemy.class, Goal.class, Goal.class, Floor.class);
@@ -41,11 +46,17 @@ public class WorldFinal extends World
         addObject(trollBoss,800,620);
     }
     
+    public void risa()
+    {
+        risaTrollBoss.play();
+        risaYaActivada = true;
+    }
+
     public void addPlayer(Player player)
     {
         addObject(player, 200, 95);
     }
-    
+
     public int getWorldId()
     {
         return worldId;
