@@ -84,15 +84,6 @@ public abstract class Entity extends Actor
         Actor under = getOneObjectAtOffset(0, getImage().getHeight()/2, Floor.class);
         return under != null;
     }
-    
-    /**
-     * Reproduce musica de fondo
-     */
-    public void playBackgroundMusic()
-    {
-        covenantDance.setVolume(30);
-        covenantDance.playLoop();
-    }
 
     /**
      * Muestra informacion oculta en pantalla para debugear
