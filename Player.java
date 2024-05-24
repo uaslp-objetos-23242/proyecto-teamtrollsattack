@@ -55,41 +55,51 @@ public class Player extends Entity
     World8 w8 = new World8();
     World9 w9 = new World9();
     WorldFinal wf = new WorldFinal();
+
+    GameOver go = new GameOver();
     // Lleva la cuenta de cuantos enemigos ha eliminado, se debe reiniciar por cada mundo
     private int worldKillCount = 0;
-    
+    private boolean isHardcore = false;
+
     Goal goal = new Goal();
     /**que mas xd
      */
     public Player()
     {
         // Salud, daño causado, velocidad
-        super(3,1,5);
-        this.armorPoints = 2;
-        this.expPoints = 0;
+        super(10,1,5);
+        this.armorPoints = 5;
         //scaleDownImage(4, 4);
     }
 
     public void act()
     {
-        //playBackgroundMusic();
-        checkFalling();
-        getPushedByInvisibleWalls();
-        debugHud();
-        hud();
-        count++;
-        slideAround();
-        attack();
-        useShield();
-        if(playerInvincible)
-            invincibilityTimer();
-        reduceHealth();
-        if(attackAnimation)
-            playAttackAnimation();
-        if(attackOnCooldown)
-            attackDelay();
-        spawnGoal();
-        changeWorld();
+        if(isAlive)
+        {
+            //playBackgroundMusic();
+            checkFalling();
+            getPushedByInvisibleWalls();
+            debugHud();
+            hud();
+            count++;
+            slideAround();
+            attack();
+            useShield();
+            if(playerInvincible)
+                invincibilityTimer();
+            reduceHealth();
+            if(attackAnimation)
+                playAttackAnimation();
+            if(attackOnCooldown)
+                attackDelay();
+            spawnGoal();
+            changeWorld();
+        }
+        else
+        {
+            getWorld().removeObject(this);
+            Greenfoot.setWorld(go);
+        }
     }
 
     /**
@@ -198,6 +208,8 @@ public class Player extends Entity
             {
                 this.health--;
                 playerInvincible = true;
+                if(this.health == 0)
+                    isAlive = false;
             }
         }
     }
@@ -227,7 +239,7 @@ public class Player extends Entity
             invincibilityFrames = 60;
         }
     }
-    
+
     public void inivicibilityIndicator()
     {
         if(invincibilityFrames % 3 == 0 && playerInvincible)
@@ -461,6 +473,30 @@ public class Player extends Entity
     public boolean getAttackAnimation()
     {
         return attackAnimation;
+    }
+
+    public void setDifficulty(boolean hardcore)
+    {
+        if(hardcore)
+        {
+            this.health = 5;
+            this.damageDealt = 2;
+            this.speed = 8;
+            this.armorPoints = 1;
+            isHardcore = true;
+        }
+    }
+
+    /**
+     * Reproduce musica de fondo
+     */
+    public void playBackgroundMusic()
+    {
+        if(!isHardcore)
+        {
+            covenantDance.setVolume(30);
+            covenantDance.playLoop();
+        }
     }
 
     public void increaseWorldKillCount()

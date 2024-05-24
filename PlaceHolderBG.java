@@ -48,6 +48,11 @@ public class PlaceHolderBG extends World
         addObject(player, 50, 50);
     }
     
+    public void addControl(MainMenuButtons mmb)
+    {
+        addObject(mmb, 0, 0);
+    }
+    
     public int getWorldId()
     {
         return worldId;
