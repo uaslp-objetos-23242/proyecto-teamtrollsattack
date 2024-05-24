@@ -13,7 +13,11 @@ public class Slash extends Projectile
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
 
-    public Slash(){}
+    private boolean moveLeft;
+    public Slash(boolean moveLeft)
+    {
+        this.moveLeft = moveLeft;
+    }
 
     public void act()
     {
@@ -24,13 +28,13 @@ public class Slash extends Projectile
 
     public void slashMovement()
     {
-        if(isPlayerAtLeft)
+        if(moveLeft)
         {    
-            move(3);
+            move(-3);
         }
         else
         {
-            move(-3);
+            move(3);
         }
     }
 
