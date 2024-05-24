@@ -25,10 +25,10 @@ public class RangerTroll extends Enemy
             setOriginalPosition();
             checkFalling();
             getDamaged();
-            wander(50,50,500);
+            wander(50,50,600);
             checkForPlayerAtLeft();
-            cambiaSprite();
-            debugHud();
+            //cambiaSprite();
+            //debugHud();
         }
     }
 

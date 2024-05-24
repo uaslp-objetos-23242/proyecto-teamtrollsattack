@@ -46,13 +46,20 @@ public class Player extends Entity
     // Guarda y muestra el numero de mundo en el que se encuentra
     private int actualWorld = 1;
     // Mundos por si se ocupa algo
-    World1 w1 = new World1();
     World2 w2 = new World2();
     World3 w3 = new World3();
     World4 w4 = new World4();
-    WorldFinal w5 = new WorldFinal();
-    /**
-     * Pos el constructor, que mas xd
+    World5 w5 = new World5();
+    World6 w6 = new World6();
+    World7 w7 = new World7();
+    World8 w8 = new World8();
+    World9 w9 = new World9();
+    WorldFinal wf = new WorldFinal();
+    // Lleva la cuenta de cuantos enemigos ha eliminado, se debe reiniciar por cada mundo
+    private int worldKillCount = 0;
+    
+    Goal goal = new Goal();
+    /**que mas xd
      */
     public Player()
     {
@@ -60,13 +67,14 @@ public class Player extends Entity
         super(3,1,5);
         this.armorPoints = 2;
         this.expPoints = 0;
-        scaleDownImage(4, 4);
+        //scaleDownImage(4, 4);
     }
 
     public void act()
     {
         //playBackgroundMusic();
         checkFalling();
+        getPushedByInvisibleWalls();
         debugHud();
         hud();
         count++;
@@ -80,6 +88,7 @@ public class Player extends Entity
             playAttackAnimation();
         if(attackOnCooldown)
             attackDelay();
+        spawnGoal();
         changeWorld();
     }
 
@@ -125,14 +134,14 @@ public class Player extends Entity
         {
             if(facingLeft)
             {
-                setImage("Hero_Attack.png");
+                setImage("HA.png");
                 getImage().mirrorHorizontally();
-                scaleDownImage(4, 4);
+                //scaleDownImage(4, 4);
             }
             else
             {
-                setImage("Hero_Attack.png");
-                scaleDownImage(4, 4);
+                setImage("HA.png");
+                //scaleDownImage(4, 4);
             }
             attackPressed = true;
             attackAnimation = true;
@@ -242,14 +251,14 @@ public class Player extends Entity
     {
         if(facingLeft)
         {
-            setImage("Hero.png");
+            setImage("H.png");
             getImage().mirrorHorizontally();
-            scaleDownImage(4, 4);
+            //scaleDownImage(4, 4);
         }
         else
         {
-            setImage("Hero.png");
-            scaleDownImage(4, 4);
+            setImage("H.png");
+            //scaleDownImage(4, 4);
         }
     }
 
@@ -260,14 +269,14 @@ public class Player extends Entity
     {
         if(facingLeft)
         {
-            setImage("Hero_Shield.png");
+            setImage("HS.png");
             getImage().mirrorHorizontally();
-            scaleDownImage(4, 4);
+            //scaleDownImage(4, 4);
         }
         else
         {
-            setImage("Hero_Shield.png");
-            scaleDownImage(4, 4);
+            setImage("HS.png");
+            //scaleDownImage(4, 4);
         }
     }
 
@@ -284,6 +293,8 @@ public class Player extends Entity
     {   Actor goalHole = getOneObjectAtOffset(0, 0, Goal.class);
         if(goalHole != null)
         {
+            getWorld().removeObject(goal);
+            worldKillCount = 0;
             switch(actualWorld)
             {
                 case 1:
@@ -302,8 +313,93 @@ public class Player extends Entity
                     w5.addPlayer(this);
                     Greenfoot.setWorld(w5);
                     break;
+                case 5:
+                    w6.addPlayer(this);
+                    Greenfoot.setWorld(w6);
+                    break;
+                case 6:
+                    w7.addPlayer(this);
+                    Greenfoot.setWorld(w7);
+                    break;
+                case 7:
+                    w8.addPlayer(this);
+                    Greenfoot.setWorld(w8);
+                    break;
+                case 8:
+                    w9.addPlayer(this);
+                    Greenfoot.setWorld(w9);
+                    break;
+                case 9:
+                    wf.addPlayer(this);
+                    Greenfoot.setWorld(wf);
+                    break;
             }
             actualWorld++;
+        }
+    }
+
+    public void spawnGoal()
+    {
+        switch(actualWorld)
+        {
+            case 1:
+                if(worldKillCount == 1)
+                {
+                    getWorld().addObject(goal, 1150, 726);
+                }  
+            case 2:
+                if(worldKillCount == 1)
+                {
+                    getWorld().addObject(goal, 50, 626);
+                }       
+            case 3:
+                if(worldKillCount == 1)
+                {
+                    getWorld().addObject(goal, 1150, 726);
+                } 
+            case 4:
+                if(worldKillCount == 2)
+                {
+                    getWorld().addObject(goal,110,725);
+                } 
+            case 5:
+                if(worldKillCount == 2)
+                {
+                    getWorld().addObject(goal,70,725);
+                } 
+            case 6:
+                if(worldKillCount == 2)
+                {
+                    getWorld().addObject(goal, 50, 225);
+                } 
+            case 7:
+                if(worldKillCount == 2)
+                {
+                    getWorld().addObject(goal,610,685);
+                } 
+            case 8:
+                if(worldKillCount == 3)
+                {
+                    getWorld().addObject(goal, 1150, 726);
+                } 
+            case 9:
+                if(worldKillCount == 3)
+                {
+                    getWorld().addObject(goal,110,725);
+                } 
+        }
+    }
+
+    public void getPushedByInvisibleWalls()
+    {
+        if(isTouching(InvisibleWallLeft.class))
+            setLocation(getX() - speed * 2, getY());
+        if(isTouching(InvisibleWallRight.class))
+            setLocation(getX() + speed * 2, getY());
+        if(isTouching(InvisibleCeiling.class))
+        {   
+            vSpeed = 0;
+            setLocation(getX(), getY() + 1);
         }
     }
 
@@ -321,22 +417,32 @@ public class Player extends Entity
         getWorld().showText("X pos: " + getX(), 350, 50);
         getWorld().showText("Y pos: " + getY(), 350, 70);
     }
-    
+
     public int showWorldId()
     {
         switch(actualWorld)
-            {
-                case 1:
-                    return w1.getWorldId();
-                case 2:
-                    return w2.getWorldId();
-                case 3:
-                    return w3.getWorldId();
-                case 4:
-                    return w4.getWorldId();
-                case 5:
-                    return w5.getWorldId();
-            }
+        {
+            case 1:
+                return 1;
+            case 2:
+                return w2.getWorldId();
+            case 3:
+                return w3.getWorldId();
+            case 4:
+                return w4.getWorldId();
+            case 5:
+                return w5.getWorldId();
+            case 6:
+                return w6.getWorldId();
+            case 7:
+                return w7.getWorldId();
+            case 8:
+                return w8.getWorldId();
+            case 9:
+                return w9.getWorldId();
+            case 10:
+                return wf.getWorldId();
+        }
         return 0;
     }
 
@@ -346,5 +452,10 @@ public class Player extends Entity
     public boolean getAttackAnimation()
     {
         return attackAnimation;
+    }
+
+    public void increaseWorldKillCount()
+    {
+        worldKillCount++;
     }
 }
