@@ -43,7 +43,10 @@ public class TrollGeneral extends Enemy
     {
         if(!slashSpawnOnCooldown)
         {
-            getWorld().addObject(new Slash(), getX(), getY());
+            if(isPlayerAtLeft)
+                getWorld().addObject(new Slash(true), getX(), getY());
+            else
+                getWorld().addObject(new Slash(false), getX(), getY());
             slashSpawnOnCooldown = true;
         }
     }

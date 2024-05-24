@@ -17,7 +17,6 @@ public class Rock extends Projectile
 
     public Rock()
     {
-        scaleUpImage(2, 2);
     }
 
     public void act()
