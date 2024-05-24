@@ -56,6 +56,7 @@ public class Player extends Entity
     World9 w9 = new World9();
     WorldFinal wf = new WorldFinal();
     GameOver go = new GameOver();
+    YouWin win = new YouWin();
     // Lleva la cuenta de cuantos enemigos ha eliminado, se debe reiniciar por cada mundo
     private int worldKillCount = 0;
     private boolean isHardcore = false;
@@ -361,6 +362,11 @@ public class Player extends Entity
                     wf.addPlayer(this);
                     Greenfoot.setWorld(wf);
                     break;
+                case 10:
+                    covenantDance.stop();
+                    ragingInferno.stop();
+                    Greenfoot.setWorld(win);
+                    break;                    
             }
             actualWorld++;
         }
@@ -414,7 +420,7 @@ public class Player extends Entity
                 if(worldKillCount == 3)
                 {
                     getWorld().addObject(goal,110,725);
-                } 
+                }
         }
     }
 

@@ -12,6 +12,7 @@ public class TrollBoss extends Enemy
     private boolean rockRainSpawnOnCooldown = false;
     private boolean alreadyScreamed = false;
     GreenfootSound screamTrollBoss = new GreenfootSound("Troll_Boss_muere.mp3");
+    Goal goal = new Goal();
     /**
      * Act - do whatever the TrollBoss wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -38,6 +39,7 @@ public class TrollBoss extends Enemy
         {
             if(!alreadyScreamed)
                 trollBossDeathScream();
+                getWorld().addObject(goal, 1150, 726);
         }
     }
 
@@ -117,7 +119,7 @@ public class TrollBoss extends Enemy
     public void boss()
     {
         screamTrollBoss.setVolume(50);
-        this.health = 1;
+        this.health = 12;
         isBoss = true;
     }
 }
