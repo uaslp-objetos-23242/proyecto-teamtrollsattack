@@ -8,12 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class TrollBoss extends Enemy
 {
+    private int rockRainSpawnDelayCounter = 200;
+    private boolean rockRainSpawnOnCooldown = false;
+    private boolean alreadyScreamed = false;
+    GreenfootSound screamTrollBoss = new GreenfootSound("Troll_Boss_muere.mp3");
     /**
      * Act - do whatever the TrollBoss wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int rockRainSpawnDelayCounter = 200;
-    private boolean rockRainSpawnOnCooldown = false;
     public TrollBoss(boolean isBoss)
     {
         super(6,1,5);
@@ -31,6 +33,11 @@ public class TrollBoss extends Enemy
             getDamaged();
             if(enemyInvincible)
                 enemyInvincibilityTimer();
+        }
+        else if(!isAlive && isBoss)
+        {
+            if(!alreadyScreamed)
+                trollBossDeathScream();
         }
     }
 
@@ -100,9 +107,17 @@ public class TrollBoss extends Enemy
             getImage().mirrorHorizontally();
         }
     }
+    
+    public void trollBossDeathScream()
+    {
+        screamTrollBoss.play();
+        alreadyScreamed = true;
+    }
 
     public void boss()
     {
-        this.health = 12;
+        screamTrollBoss.setVolume(50);
+        this.health = 1;
+        isBoss = true;
     }
 }

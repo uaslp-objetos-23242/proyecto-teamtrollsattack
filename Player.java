@@ -59,6 +59,8 @@ public class Player extends Entity
     // Lleva la cuenta de cuantos enemigos ha eliminado, se debe reiniciar por cada mundo
     private int worldKillCount = 0;
     private boolean isHardcore = false;
+    
+    GreenfootSound espadazo = new GreenfootSound("espadazo.mp3");
 
     GreenfootSound covenantDance = new GreenfootSound("CovenantDance.mp3");
     GreenfootSound ragingInferno = new GreenfootSound("RagingInferno.mp3");
@@ -70,6 +72,7 @@ public class Player extends Entity
         // Salud, daño causado, velocidad
         super(10,1,5);
         this.armorPoints = 5;
+        espadazo.setVolume(40);
         //scaleDownImage(4, 4);
     }
 
@@ -145,6 +148,7 @@ public class Player extends Entity
     {
         if(Greenfoot.isKeyDown("j") && !attackOnCooldown && !attackPressed && !attackAnimation && onGround() && !usingShield)
         {
+            espadazo.play();
             if(facingLeft)
             {
                 setImage("HA.png");
