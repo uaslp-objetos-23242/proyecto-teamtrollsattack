@@ -219,12 +219,21 @@ public class Player extends Entity
      */
     public void invincibilityTimer()
     {
+        inivicibilityIndicator();
         invincibilityFrames--;
         if(invincibilityFrames == 0)
         {
             playerInvincible = false;
             invincibilityFrames = 60;
         }
+    }
+    
+    public void inivicibilityIndicator()
+    {
+        if(invincibilityFrames % 3 == 0 && playerInvincible)
+            getImage().setTransparency(100);
+        else
+            getImage().setTransparency(255);
     }
 
     /**

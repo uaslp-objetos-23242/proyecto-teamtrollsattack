@@ -27,6 +27,8 @@ public class MountainTroll extends Enemy
             checkForPlayerAtLeft();
             wander(200, 200, 200);
             getDamaged();
+            if(enemyInvincible)
+                enemyInvincibilityTimer();
         }
     }
 

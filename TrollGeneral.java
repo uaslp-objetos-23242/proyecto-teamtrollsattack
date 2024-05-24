@@ -26,7 +26,9 @@ public class TrollGeneral extends Enemy
             checkFalling();
             checkForPlayerAtLeft();
             wander(100, 100, 200);
-            getDamaged();  
+            getDamaged();
+            if(enemyInvincible)
+                enemyInvincibilityTimer();
         }
     }
 
