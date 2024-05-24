@@ -55,12 +55,13 @@ public class Player extends Entity
     World8 w8 = new World8();
     World9 w9 = new World9();
     WorldFinal wf = new WorldFinal();
-
     GameOver go = new GameOver();
     // Lleva la cuenta de cuantos enemigos ha eliminado, se debe reiniciar por cada mundo
     private int worldKillCount = 0;
     private boolean isHardcore = false;
 
+    GreenfootSound covenantDance = new GreenfootSound("CovenantDance.mp3");
+    GreenfootSound ragingInferno = new GreenfootSound("RagingInferno.mp3");
     Goal goal = new Goal();
     /**que mas xd
      */
@@ -76,7 +77,7 @@ public class Player extends Entity
     {
         if(isAlive)
         {
-            //playBackgroundMusic();
+            playBackgroundMusic();
             checkFalling();
             getPushedByInvisibleWalls();
             debugHud();
@@ -99,6 +100,8 @@ public class Player extends Entity
         {
             getWorld().removeObject(this);
             Greenfoot.setWorld(go);
+            covenantDance.stop();
+            ragingInferno.stop();
         }
     }
 
@@ -434,37 +437,9 @@ public class Player extends Entity
         getWorld().showText("Facing left: " + facingLeft, 200, 90);
         getWorld().showText("On floor: " + onGround(), 200, 110);
         getWorld().showText("Player world: " + actualWorld, 200, 130);
-        getWorld().showText("Actual world ID: " + showWorldId(), 200, 150);
+        //getWorld().showText("Actual world ID: " + showWorldId(), 200, 150);
         getWorld().showText("X pos: " + getX(), 350, 50);
         getWorld().showText("Y pos: " + getY(), 350, 70);
-    }
-
-    public int showWorldId()
-    {
-        switch(actualWorld)
-        {
-            case 1:
-                return 1;
-            case 2:
-                return w2.getWorldId();
-            case 3:
-                return w3.getWorldId();
-            case 4:
-                return w4.getWorldId();
-            case 5:
-                return w5.getWorldId();
-            case 6:
-                return w6.getWorldId();
-            case 7:
-                return w7.getWorldId();
-            case 8:
-                return w8.getWorldId();
-            case 9:
-                return w9.getWorldId();
-            case 10:
-                return wf.getWorldId();
-        }
-        return 0;
     }
 
     /**
@@ -496,6 +471,11 @@ public class Player extends Entity
         {
             covenantDance.setVolume(30);
             covenantDance.playLoop();
+        }
+        else
+        {
+            ragingInferno.setVolume(30);
+            ragingInferno.playLoop();
         }
     }
 

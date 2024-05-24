@@ -19,8 +19,6 @@ public abstract class Entity extends Actor
     protected int damageDealt;
     protected int speed;
     
-    GreenfootSound covenantDance = new GreenfootSound("Covenant Dance.mp3");
-    
     protected int vSpeed = 0;
     protected int acceleration = 1;
     
