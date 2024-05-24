@@ -12,11 +12,11 @@ public class TrollGeneral extends Enemy
      * Act - do whatever the TrollGeneral wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int slashSpawnDelayCounter = 100;
+    private int slashSpawnDelayCounter = 130;
     private boolean slashSpawnOnCooldown = false;
     public TrollGeneral()
     {
-        super(3,2,5);
+        super(3,2,4);
     }
 
     public void act()
@@ -51,7 +51,7 @@ public class TrollGeneral extends Enemy
         slashSpawnDelayCounter--;
         if(slashSpawnDelayCounter == 0)
         {
-            slashSpawnDelayCounter = 100;
+            slashSpawnDelayCounter = 130;
             slashSpawnOnCooldown = false;
         }
     }

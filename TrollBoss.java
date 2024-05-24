@@ -14,9 +14,11 @@ public class TrollBoss extends Enemy
      */
     private int rockRainSpawnDelayCounter = 200;
     private boolean rockRainSpawnOnCooldown = false;
-    public TrollBoss()
+    public TrollBoss(boolean isBoss)
     {
-        super(3,1,5);
+        super(6,1,5);
+        if(isBoss)
+            boss();
     }
 
     public void act()
@@ -28,6 +30,7 @@ public class TrollBoss extends Enemy
             wander(100, 100, 200);
             getDamaged();  
         }
+        debugHud();
     }
 
     public void engage()
@@ -72,5 +75,11 @@ public class TrollBoss extends Enemy
             rockRainSpawnDelayCounter = 200;
             rockRainSpawnOnCooldown = false;
         }
+    }
+    
+        
+    public void boss()
+    {
+        this.health = 12;
     }
 }

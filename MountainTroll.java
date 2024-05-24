@@ -41,8 +41,8 @@ public class MountainTroll extends Enemy
     {
         if(!waveSpawnOnCooldown)
         {
-            getWorld().addObject(new Shockwave(true), getX(), getY() + getImage().getHeight()/2);
-            getWorld().addObject(new Shockwave(false), getX(), getY() + getImage().getHeight()/2);
+            getWorld().addObject(new Shockwave(true), getX(), getY() + getImage().getHeight()/2 - 20);
+            getWorld().addObject(new Shockwave(false), getX(), getY() + getImage().getHeight()/2 - 20);
             waveSpawnOnCooldown = true;
         }
     }

@@ -26,11 +26,11 @@ public class Slash extends Projectile
     {
         if(isPlayerAtLeft)
         {    
-            move(1);
+            move(3);
         }
         else
         {
-            move(-1);
+            move(-3);
         }
     }
 

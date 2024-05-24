@@ -14,7 +14,7 @@ public abstract class Enemy extends Entity
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     //Si es jefe, tebdra atributos especiales como daño y vida aumentados
-    private boolean isBoss = false;
+    protected boolean isBoss = false;
 
     //Si el jugador se encuentra en el radio del enemigo
     protected boolean isPlayerInSight = false;
@@ -122,14 +122,15 @@ public abstract class Enemy extends Entity
      */
     public void despawnOnDeath()
     {
-        getImage().scale(1,1);
+        scaleDownImage(10, 10);
+        getPlayerInfo().increaseWorldKillCount();
         setLocation(0, 0);
     }
 
     public void getDamaged()
     {   
-        Actor player = getOneObjectAtOffset(0, 0, Player.class);
-        if(player != null && getPlayerInfo().getAttackAnimation() && this.health >= 1)
+        //Actor player = getOneObjectAtOffset(0, 0, Player.class);
+        if(isTouching(Player.class) && getPlayerInfo().getAttackAnimation() && this.health >= 1)
             this.health--;
         if(this.health < 1)
         {
