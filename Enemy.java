@@ -24,17 +24,21 @@ public abstract class Enemy extends Entity
     protected int originalXPos = -1;
     protected int originalYPos = -1;
 
+    protected boolean enemyInvincible = false;
+    // Tiempo que el jugador es invencile despues de recibir daño
+    protected int enemyInvincibilityFrames = 30;
+
     public Enemy(int health, int damageDealt, int speed)
     {
         super(health,damageDealt,speed);
         int band=0, cont=0;
         // Salud, daño causado, velocidad
-        
+
     }
 
     public void act()
     {
-        
+
     }
 
     /**
@@ -130,13 +134,35 @@ public abstract class Enemy extends Entity
     public void getDamaged()
     {   
         //Actor player = getOneObjectAtOffset(0, 0, Player.class);
-        if(isTouching(Player.class) && getPlayerInfo().getAttackAnimation() && this.health >= 1)
+        if(isTouching(Player.class) && getPlayerInfo().getAttackAnimation() && this.health >= 1 && !enemyInvincible)
+        {
             this.health--;
+            enemyInvincible = true;
+        }
         if(this.health < 1)
         {
             isAlive = false;
             despawnOnDeath();
         }
+    }
+
+    public void enemyInvincibilityTimer()
+    {
+        enemyInivicibilityIndicator();
+        enemyInvincibilityFrames--;
+        if(enemyInvincibilityFrames == 0)
+        {
+            enemyInvincible = false;
+            enemyInvincibilityFrames = 30;
+        }
+    }
+
+    public void enemyInivicibilityIndicator()
+    {
+        if(enemyInvincibilityFrames % 3 == 0 && enemyInvincible)
+            getImage().setTransparency(100);
+        else
+            getImage().setTransparency(255);
     }
 
     public void debugHud()
@@ -150,7 +176,7 @@ public abstract class Enemy extends Entity
         getWorld().showText("Original X pos: " + originalXPos, 900, 130);
         getWorld().showText("Original Y pos: " + originalYPos, 900, 150);
     }
-    
+
     public void Recargar()
     {
         if (this.mun<1&&cont2%100==0)
@@ -158,4 +184,4 @@ public abstract class Enemy extends Entity
         cont2++;
     }
 }
-    
+

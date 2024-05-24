@@ -27,8 +27,8 @@ public class RangerTroll extends Enemy
             getDamaged();
             wander(50,50,600);
             checkForPlayerAtLeft();
-            //cambiaSprite();
-            //debugHud();
+            if(enemyInvincible)
+                enemyInvincibilityTimer();
         }
     }
 
