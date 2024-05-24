@@ -34,11 +34,34 @@ public class TrollGeneral extends Enemy
 
     public void engage()
     {
+        lockOnPlayer();
         spawnSlash();
         if(slashSpawnOnCooldown)
             slashSpawnDelay();
     }
-    
+
+    public void lockOnPlayer()
+    {
+        if(isPlayerAtLeft)
+            setImage("Troll_general.png");
+        else
+        {
+            setImage("Troll_general.png");
+            getImage().mirrorHorizontally();
+        }
+    }
+
+    public void turnWhileWandering()
+    {
+        if(speed > 0)
+            setImage("Troll_general.png");
+        else
+        {
+            setImage("Troll_general.png");
+            getImage().mirrorHorizontally();
+        }
+    }
+
     public void spawnSlash()
     {
         if(!slashSpawnOnCooldown)

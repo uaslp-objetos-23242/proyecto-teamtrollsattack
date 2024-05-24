@@ -34,9 +34,32 @@ public class MountainTroll extends Enemy
 
     public void engage()
     {
+        lockOnPlayer();
         spawnShockWaves();
         if(waveSpawnOnCooldown)
             waveSpawnDelay();
+    }
+    
+    public void lockOnPlayer()
+    {
+        if(isPlayerAtLeft)
+            setImage("Mountain_Troll.png");
+        else
+        {
+            setImage("Mountain_Troll.png");
+            getImage().mirrorHorizontally();
+        }
+    }
+
+    public void turnWhileWandering()
+    {
+        if(speed > 0)
+            setImage("Mountain_Troll.png");
+        else
+        {
+            setImage("Mountain_Troll.png");
+            getImage().mirrorHorizontally();
+        }
     }
 
     public void spawnShockWaves()

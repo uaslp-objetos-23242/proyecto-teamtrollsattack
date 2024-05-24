@@ -50,15 +50,15 @@ public abstract class Enemy extends Entity
         lookingForPlayer(detectionRange);
         if(!isPlayerInSight)
         {
-            setLocation(getX() + speed, getY());
+            setLocation(getX() - speed, getY());
             if(getX() == originalXPos - maxLeftDistance || getX() == originalXPos + maxRightDistance || isAtEdge())
             {
                 speed *= -1;
+                turnWhileWandering();
             }
             setRotation(0);
         }
         else
-
             engage();
     }
 
@@ -66,6 +66,8 @@ public abstract class Enemy extends Entity
      * Inicia el combate con el jugador, cada subclase de enemigo ataca diferente
      */
     public abstract void engage();
+    
+    public abstract void turnWhileWandering();
 
     /**
      * Regresa true si el jugador esta cerca y false si no

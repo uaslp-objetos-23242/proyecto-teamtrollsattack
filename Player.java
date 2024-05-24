@@ -24,7 +24,7 @@ public class Player extends Entity
     // Sirve para llevar un flujo mas manejable de la gravedad y algunos temporizadores
     private int count = 0;
     // Frames antes de poder volver a atacar
-    private int attackDelayTimer = 20;
+    private int attackDelayTimer = 30;
     // Obligar al jugador a soltar el boton de salto para volver a saltar
     private boolean jumpPressed = false;
     // Determina si se puede atacar o no
@@ -130,7 +130,7 @@ public class Player extends Entity
      */
     public void attack()
     {
-        if(Greenfoot.isKeyDown("j") && !attackOnCooldown && !attackPressed && !attackAnimation && onGround())
+        if(Greenfoot.isKeyDown("j") && !attackOnCooldown && !attackPressed && !attackAnimation && onGround() && !usingShield)
         {
             if(facingLeft)
             {
@@ -175,7 +175,7 @@ public class Player extends Entity
         if(attackDelayTimer == 0)
         {
             moveAnimation();
-            attackDelayTimer = 20;
+            attackDelayTimer = 30;
             attackOnCooldown = false;
         }
     }

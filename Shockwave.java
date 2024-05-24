@@ -13,6 +13,7 @@ public class Shockwave extends Projectile
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private boolean moveLeft;
+    private boolean spriteSet = false;
 
     public Shockwave(boolean moveLeft)
     {
@@ -21,6 +22,8 @@ public class Shockwave extends Projectile
 
     public void act()
     {
+        if(!spriteSet)
+            setSprites();
         setOriginalPosition();
         waveMovement();
         despawnWaves();
@@ -37,6 +40,13 @@ public class Shockwave extends Projectile
             move(3);
         }
     }
+    
+    public void setSprites()
+    {
+        if(!moveLeft)
+            getImage().mirrorHorizontally();
+        spriteSet = true;
+    }
 
     public void despawnWaves()
     {
@@ -46,4 +56,6 @@ public class Shockwave extends Projectile
             getWorld().removeObject(this);
         }
     }
+    
+    public void turnWhileWandering(){}
 }

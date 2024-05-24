@@ -36,6 +36,7 @@ public class TrollBoss extends Enemy
 
     public void engage()
     {
+        lockOnPlayer();
         spawnRockRain();
         if(rockRainSpawnOnCooldown)
             rockRainSpawnDelay();
@@ -77,8 +78,29 @@ public class TrollBoss extends Enemy
             rockRainSpawnOnCooldown = false;
         }
     }
-    
-        
+
+    public void lockOnPlayer()
+    {
+        if(isPlayerAtLeft)
+            setImage("Troll_boss.png");
+        else
+        {
+            setImage("Troll_boss.png");
+            getImage().mirrorHorizontally();
+        }
+    }
+
+    public void turnWhileWandering()
+    {
+        if(speed > 0)
+            setImage("Troll_boss.png");
+        else
+        {
+            setImage("Troll_boss.png");
+            getImage().mirrorHorizontally();
+        }
+    }
+
     public void boss()
     {
         this.health = 12;

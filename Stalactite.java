@@ -29,4 +29,6 @@ public class Stalactite extends Projectile
             getWorld().removeObject(this);
         }
     }
+    
+    public void turnWhileWandering(){}
 }
