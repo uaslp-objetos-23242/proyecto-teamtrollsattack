@@ -14,6 +14,7 @@ public class Slash extends Projectile
      */
 
     private boolean moveLeft;
+    private boolean spriteSet = false;
     public Slash(boolean moveLeft)
     {
         this.moveLeft = moveLeft;
@@ -21,6 +22,8 @@ public class Slash extends Projectile
 
     public void act()
     {
+        if(!spriteSet)
+            setSprites();
         setOriginalPosition();
         slashMovement();
         despawnSlash();
@@ -46,4 +49,13 @@ public class Slash extends Projectile
             getWorld().removeObject(this);
         }
     }
+
+    public void setSprites()
+    {
+        if(moveLeft)
+            getImage().mirrorHorizontally();
+        spriteSet = true;
+    }
+
+    public void turnWhileWandering(){}
 }

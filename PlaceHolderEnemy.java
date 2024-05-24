@@ -33,5 +33,7 @@ public class PlaceHolderEnemy extends Enemy
     {
         setRotation(270);
     }
+    
+    public void turnWhileWandering(){}
 }
 

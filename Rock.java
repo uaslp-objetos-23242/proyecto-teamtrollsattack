@@ -56,4 +56,6 @@ public class Rock extends Projectile
             checkDir=true;
         }
     }
+    
+    public void turnWhileWandering(){}
 }

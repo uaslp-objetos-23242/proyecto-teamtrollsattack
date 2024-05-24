@@ -34,6 +34,7 @@ public class RangerTroll extends Enemy
 
     public void engage()
     {
+        lockOnPlayer();
         if(this.mun>0)
         {
             Dispara();
@@ -42,6 +43,28 @@ public class RangerTroll extends Enemy
         if(10000%10==0)
         {
             Recargar();
+        }
+    }
+
+    public void lockOnPlayer()
+    {
+        if(isPlayerAtLeft)
+            setImage("Troll_ranger3.png");
+        else
+        {
+            setImage("Troll_ranger3.png");
+            getImage().mirrorHorizontally();
+        }
+    }
+
+    public void turnWhileWandering()
+    {
+        if(speed > 0)
+            setImage("Troll_ranger3.png");
+        else
+        {
+            setImage("Troll_ranger3.png");
+            getImage().mirrorHorizontally();
         }
     }
 
