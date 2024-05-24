@@ -1,35 +1,38 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class rock here.
+ * Esta clase representa una piedra para dañar al jugador, una instancia de Rock
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class Rock extends Projectile
 {
+    private boolean lanzada;
+    private boolean checkDir=false;
+    public Rock(){}
+
     /**
      * Act - do whatever the rock wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private boolean lanzada;
-    private boolean checkDir=false;
-
-    public Rock()
-    {
-    }
-
     public void act()
     {
         check();
         Movimiento();
     }
 
+    /**
+     * Inicia el combate con el jugador, cada subclase de enemigo ataca diferente
+     */
     public void engage()
     {
-        
+
     }
-    
+
+    /**
+     * Direccion y velocidad del proyectil
+     */
     public void Movimiento()
     {
         if (isPlayerAtLeft==true)
@@ -41,13 +44,13 @@ public class Rock extends Projectile
         {
             move(10);
         }
-        
+
         if(isAtEdge()==true)
         {
             getWorld().removeObject(this);
         }
     }  
-    
+
     public void check()
     {
         if (checkDir==false)
@@ -56,6 +59,6 @@ public class Rock extends Projectile
             checkDir=true;
         }
     }
-    
+
     public void turnWhileWandering(){}
 }

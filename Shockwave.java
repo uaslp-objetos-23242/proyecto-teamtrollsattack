@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Shockwave here.
+ * Esta clase representa una onda de choque generada por golpear el suelo, una instancia de Shockwave
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class Shockwave extends Projectile
 {
-    /**
-     * Act - do whatever the Shockwave wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     private boolean moveLeft;
     private boolean spriteSet = false;
 
@@ -20,6 +16,10 @@ public class Shockwave extends Projectile
         this.moveLeft = moveLeft;
     }
 
+    /**
+     * Act - do whatever the Shockwave wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
     public void act()
     {
         if(!spriteSet)
@@ -29,6 +29,9 @@ public class Shockwave extends Projectile
         despawnWaves();
     }
 
+    /**
+     * Velocidad y direccion a la que se mueven las ondas de choque
+     */
     public void waveMovement()
     {
         if(moveLeft)
@@ -40,7 +43,10 @@ public class Shockwave extends Projectile
             move(3);
         }
     }
-    
+
+    /**
+     * Pone las imagenes de forma coherente a su direccion
+     */
     public void setSprites()
     {
         if(!moveLeft)
@@ -48,6 +54,9 @@ public class Shockwave extends Projectile
         spriteSet = true;
     }
 
+    /**
+     * Hace desaparecer las ondas de choque
+     */
     public void despawnWaves()
     {
         int maxDistance = 200;
@@ -56,6 +65,6 @@ public class Shockwave extends Projectile
             getWorld().removeObject(this);
         }
     }
-    
+
     public void turnWhileWandering(){}
 }

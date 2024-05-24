@@ -1,15 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class World2 here.
+ * Esta clase es el nivel 2 del juego
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros 
+ * @version 1
  */
 public class World2 extends World
 {
-
-    private int worldId = 2;
     /**
      * Constructor for objects of class World2.
      * 
@@ -38,13 +36,12 @@ public class World2 extends World
         addObject(invisibleWallRight,368,718);
     }
 
+    /**
+     * Agrega una instancia de la clase jugador
+     * @Param El jugador con sus datos actuales, como la salud
+     */
     public void addPlayer(Player player)
     {
         addObject(player, 1100, 190);
-    }
-
-    public int getWorldId()
-    {
-        return worldId;
     }
 }

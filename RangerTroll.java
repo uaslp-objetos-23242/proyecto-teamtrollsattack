@@ -1,23 +1,23 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class RangerTroll here.
+ * Esta clase representa una instancia de RangerTroll
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class RangerTroll extends Enemy
 {
-    /**
-     * Act - do whatever the RangerTroll wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public RangerTroll()
     {
         super(1,1,1);
         //scaleDownImage(2, 2);
     }
 
+    /**
+     * Act - do whatever the RangerTroll wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
     public void act()
     {
         if(isAlive)
@@ -32,6 +32,9 @@ public class RangerTroll extends Enemy
         }
     }
 
+    /**
+     * Inicia el combate con el jugador, cada subclase de enemigo ataca diferente
+     */
     public void engage()
     {
         lockOnPlayer();
@@ -46,6 +49,9 @@ public class RangerTroll extends Enemy
         }
     }
 
+    /**
+     * Mantiene la direccion hacia el jugador
+     */
     public void lockOnPlayer()
     {
         if(isPlayerAtLeft)
@@ -57,6 +63,9 @@ public class RangerTroll extends Enemy
         }
     }
 
+    /**
+     * Gira la imagen para simular movimiento
+     */
     public void turnWhileWandering()
     {
         if(speed > 0)
@@ -68,24 +77,12 @@ public class RangerTroll extends Enemy
         }
     }
 
+    /**
+     * Crea proyectiles
+     */
     public void Dispara()
     {
         getWorld().addObject(new Rock(), getX(), getY());
         mun --;
-    }
-
-    public void cambiaSprite()
-    {
-        if(isPlayerAtLeft==true && isPlayerInSight)
-        {
-            setImage("Troll_ranger3.png");
-            //scaleDownImage(2, 2);
-        }
-        else
-        {
-            setImage("Troll_ranger3.png");
-            getImage().mirrorHorizontally();
-            //scaleDownImage(2, 2);
-        }
     }
 }

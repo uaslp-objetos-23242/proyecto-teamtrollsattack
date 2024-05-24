@@ -4,24 +4,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Esta clase engloba todos los metodos y variables que tienen en comun algunos actores
  * Principalmente Player y Enemy
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public abstract class Entity extends Actor
 {
-    /**
-     * Act - do whatever the Entity wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-
     //La entidad unifica aspectos que todos comparte como salud, daño y velocidad, obvio varia por personaje
     protected int health;
     protected int damageDealt;
     protected int speed;
-    
+
     protected int vSpeed = 0;
     protected int acceleration = 1;
-    
+
     //Estado de la entidad, vivo o muerto, no creo se ocupe pero por si acaso
     protected boolean isAlive;
     protected int cont2;
@@ -33,27 +28,25 @@ public abstract class Entity extends Actor
         this.isAlive = true;
     }
 
+    /**
+     * Act - do whatever the Entity wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
     public void act()
     {
-        
+
     }
 
     /**
      * Reescala la imagen para hacerla mas pequeña
+     * @Param horizontalScaleDown la cantidad que se va a reducir horizontalmente
+     * @Param verticalScaleDown la cantidad que se va a reducir verticalmente
      */
     public void scaleDownImage(int horizontalScaleDown, int verticalScaleDown)
     {
         getImage().scale(getImage().getWidth()/horizontalScaleDown, getImage().getHeight()/verticalScaleDown);
     }
 
-    /**
-     * Reescala la imagen para hacerla mas grande
-     */
-    public void scaleUpImage(int horizontalScaleDown, int verticalScaleDown)
-    {
-        getImage().scale(getImage().getWidth() * horizontalScaleDown, getImage().getHeight() * verticalScaleDown);
-    }
-    
     /**
      * Inicia la caida al no estar tocando el suelo
      */
@@ -64,7 +57,7 @@ public abstract class Entity extends Actor
         else
             vSpeed = 0;
     }
-    
+
     /**
      * Hace caer a los objetos
      */
@@ -73,7 +66,7 @@ public abstract class Entity extends Actor
         setLocation(getX(), getY() + vSpeed);
         vSpeed += acceleration;
     }
-    
+
     /**
      * Revisa si esta tocando el suelo
      */

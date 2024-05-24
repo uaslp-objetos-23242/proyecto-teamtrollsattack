@@ -1,18 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 /**
- * Write a description of class Enemy here.
+ * Esta clase engloba a todo lo que puede resultar dañino para el jugador
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public abstract class Enemy extends Entity
 {
     int mun, band;
-    /**
-     * Act - do whatever the Enemy wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     //Si es jefe, tebdra atributos especiales como daño y vida aumentados
     protected boolean isBoss = false;
 
@@ -36,6 +32,10 @@ public abstract class Enemy extends Entity
 
     }
 
+    /**
+     * Act - do whatever the Enemy wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
     public void act()
     {
 
@@ -43,6 +43,9 @@ public abstract class Enemy extends Entity
 
     /**
      * Hace que el objeto de la clase se mueva de un lado a otro en un rango determinado
+     * @Param maxLeftDistance Distancia maxima a la que puede moverse el enemigo hacia la izquierda desde su punto de origen
+     * @Param maxRightDistance Distancia maxima a la que puede moverse el enemigo hacia la derecha desde su punto de origen
+     * @Param detectionRange Es la distancia a la que el enemigo puede llegar a ver al jugador
      */
     public void wander(int maxLeftDistance, int maxRightDistance, int detectionRange)
     {
@@ -66,11 +69,15 @@ public abstract class Enemy extends Entity
      * Inicia el combate con el jugador, cada subclase de enemigo ataca diferente
      */
     public abstract void engage();
-    
+
+    /**
+     * Gira la imagen para simular movimiento
+     */
     public abstract void turnWhileWandering();
 
     /**
      * Regresa true si el jugador esta cerca y false si no
+     * @Param detectionRange Es la distancia a la que el enemigo puede llegar a ver al jugador
      */
     public void lookingForPlayer(int detectionRange)
     {
@@ -93,6 +100,7 @@ public abstract class Enemy extends Entity
 
     /**
      * Revisa si el jugador se encuentra en un radio determinado
+     * @Param detectionRange Es la distancia a la que el enemigo puede llegar a ver al jugador
      */
     public boolean playerIsNearby(int detectionRange)
     {
@@ -120,7 +128,6 @@ public abstract class Enemy extends Entity
             originalXPos = getX();
             originalYPos = getY();
         }
-
     }
 
     /**
@@ -129,10 +136,14 @@ public abstract class Enemy extends Entity
     public void despawnOnDeath()
     {
         scaleDownImage(10, 10);
+        getImage().setTransparency(0);
         getPlayerInfo().increaseWorldKillCount();
         setLocation(0, 0);
     }
 
+    /**
+     * Revisa si el enemigo recibio daño
+     */
     public void getDamaged()
     {   
         //Actor player = getOneObjectAtOffset(0, 0, Player.class);
@@ -148,6 +159,9 @@ public abstract class Enemy extends Entity
         }
     }
 
+    /**
+     * Temporizador del enemigo para que no reciba daño
+     */
     public void enemyInvincibilityTimer()
     {
         enemyInivicibilityIndicator();
@@ -159,6 +173,9 @@ public abstract class Enemy extends Entity
         }
     }
 
+    /**
+     * Da un efecto de parpadeo al enemigo al ser dañado
+     */
     public void enemyInivicibilityIndicator()
     {
         if(enemyInvincibilityFrames % 3 == 0 && enemyInvincible)
@@ -167,6 +184,9 @@ public abstract class Enemy extends Entity
             getImage().setTransparency(255);
     }
 
+    /**
+     * Muestra datos ocultos del juego
+     */
     public void debugHud()
     {
         getWorld().showText("X pos: " + getX(), 700, 50);

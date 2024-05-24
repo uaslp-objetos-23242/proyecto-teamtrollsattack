@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class World8 here.
+ * Esta clase es el nivel 8 del juego
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros 
+ * @version 1
  */
 public class World8 extends World
 {
@@ -13,7 +13,6 @@ public class World8 extends World
      * Constructor for objects of class World8.
      * 
      */
-    private int worldId = 8;
     public World8()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -44,13 +43,12 @@ public class World8 extends World
         addObject(invisibleWallLeft,394,185);
     }
 
+    /**
+     * Agrega una instancia de la clase jugador
+     * @Param El jugador con sus datos actuales, como la salud
+     */
     public void addPlayer(Player player)
     {
         addObject(player, getWidth()/2, getHeight()/2 - 310);
-    }
-
-    public int getWorldId()
-    {
-        return worldId;
     }
 }

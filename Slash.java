@@ -1,18 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Slash here.
+ * Esta clase representa un corte con una espada, una instancia de Slash
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class Slash extends Projectile
 {
-    /**
-     * Act - do whatever the Slash wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-
     private boolean moveLeft;
     private boolean spriteSet = false;
     public Slash(boolean moveLeft)
@@ -20,6 +15,10 @@ public class Slash extends Projectile
         this.moveLeft = moveLeft;
     }
 
+    /**
+     * Act - do whatever the Slash wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
     public void act()
     {
         if(!spriteSet)
@@ -29,6 +28,9 @@ public class Slash extends Projectile
         despawnSlash();
     }
 
+    /**
+     * Realiza el movimiento del corte
+     */
     public void slashMovement()
     {
         if(moveLeft)
@@ -41,6 +43,9 @@ public class Slash extends Projectile
         }
     }
 
+    /**
+     * Hace desaparecer los cortes
+     */
     public void despawnSlash()
     {
         int maxDistance = 200;
@@ -50,6 +55,9 @@ public class Slash extends Projectile
         }
     }
 
+    /**
+     * Pone las imagenes de forma coherente a su direccion
+     */
     public void setSprites()
     {
         if(moveLeft)

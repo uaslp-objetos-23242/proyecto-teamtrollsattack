@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class InvisibleCeiling here.
+ * Esta clase representa un techo invisible
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class InvisibleCeiling extends InvisibleWall
 {
-    /**
-     * Act - do whatever the InvisibleCeiling wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public InvisibleCeiling(int ancho, int alto)
     {
         getImage().scale(ancho, alto);
@@ -19,6 +15,10 @@ public class InvisibleCeiling extends InvisibleWall
             turnInvisible();
     }
 
+    /**
+     * Act - do whatever the InvisibleWallLeft wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
     public void act()
     {
         // Add your action code here.

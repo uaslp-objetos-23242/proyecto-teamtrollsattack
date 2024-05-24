@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class TrollGeneral here.
+ * Esta clase representa una instancia de TrollGeneral
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class TrollGeneral extends Enemy
 {
-    /**
-     * Act - do whatever the TrollGeneral wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     private int slashSpawnDelayCounter = 130;
     private boolean slashSpawnOnCooldown = false;
     public TrollGeneral()
@@ -19,6 +15,10 @@ public class TrollGeneral extends Enemy
         super(3,2,4);
     }
 
+    /**
+     * Act - do whatever the TrollGeneral wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
     public void act()
     {
         if(isAlive)
@@ -32,6 +32,9 @@ public class TrollGeneral extends Enemy
         }
     }
 
+    /**
+     * Inicia el combate con el jugador, cada subclase de enemigo ataca diferente
+     */
     public void engage()
     {
         lockOnPlayer();
@@ -40,6 +43,9 @@ public class TrollGeneral extends Enemy
             slashSpawnDelay();
     }
 
+    /**
+     * Mantiene la direccion hacia el jugador
+     */
     public void lockOnPlayer()
     {
         if(isPlayerAtLeft)
@@ -51,6 +57,9 @@ public class TrollGeneral extends Enemy
         }
     }
 
+    /**
+     * Gira la imagen para simular movimiento
+     */
     public void turnWhileWandering()
     {
         if(speed > 0)
@@ -62,6 +71,9 @@ public class TrollGeneral extends Enemy
         }
     }
 
+    /**
+     * Hace aparecer un corte
+     */
     public void spawnSlash()
     {
         if(!slashSpawnOnCooldown)
@@ -74,6 +86,9 @@ public class TrollGeneral extends Enemy
         }
     }
 
+    /**
+     * Un delay entre cortes creados
+     */
     public void slashSpawnDelay()
     {
         slashSpawnDelayCounter--;

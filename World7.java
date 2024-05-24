@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class World7 here.
+ * Esta clase es el nivel 7 del juego
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class World7 extends World
 {
@@ -13,7 +13,6 @@ public class World7 extends World
      * Constructor for objects of class World7.
      * 
      */
-    private int worldId = 7;
     public World7()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -58,13 +57,12 @@ public class World7 extends World
         addObject(invisibleWallRight3,377,665);
     }
 
+    /**
+     * Agrega una instancia de la clase jugador
+     * @Param El jugador con sus datos actuales, como la salud
+     */
     public void addPlayer(Player player)
     {
         addObject(player, 250, 52);
-    }
-
-    public int getWorldId()
-    {
-        return worldId;
     }
 }

@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Story here.
+ * Esta clase es donde se cuenta la historia
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros 
+ * @version 1
  */
 public class Story extends World
 {
@@ -30,7 +30,9 @@ public class Story extends World
         showText("con el rey de los trolls.", getWidth()/2, getHeight()/2 + 100);
         showText("Presiona enter para iniciar", getWidth()/2, getHeight()/2 + 180);
     }
-    
+    /**
+     * Agrega una instancia de la clase MainMenuButtons
+     */
     public void addControl(MainMenuButtons mmb)
     {
         addObject(mmb, 0, 0);

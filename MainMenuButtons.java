@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class MainMenuButtons here.
+ * Esta clase representa una instancia de MainMenuButtons, sirve para controlar las diversas paginas
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class MainMenuButtons extends Actor
 {
-    /**
-     * Act - do whatever the MainMenuButtons wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     Story s = new Story();
     PlaceHolderBG w1 = new PlaceHolderBG();
     GreenfootSound mainMenu = new GreenfootSound("TrollsAttackMainTheme.mp3");
@@ -24,12 +20,19 @@ public class MainMenuButtons extends Actor
         mainMenu.setVolume(50);
         storySong.setVolume(50);
     }
-    
+
+    /**
+     * Act - do whatever the MainMenuButtons wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
     public void act()
     {
         advance();
     }
 
+    /**
+     * Esta clase muestra los diversos controles del personaje sobre el mundo
+     */
     public void advance()
     {   
         if(onMainMenu)
@@ -61,7 +64,10 @@ public class MainMenuButtons extends Actor
             }
         }
     }
-    
+
+    /**
+     * Adquiere una copia del jugador para obtener datos relevantes
+     */
     public Player getPlayerInfo()
     {
         return getWorld().getObjects(Player.class).get(0);

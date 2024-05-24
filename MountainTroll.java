@@ -1,17 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class MountainTroll here.
+ * Esta clase es una instancia del TrollMountain
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class MountainTroll extends Enemy
 {
-    /**
-     * Act - do whatever the MountainTroll wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     private int waveSpawnDelayCounter = 150;
     private boolean waveSpawnOnCooldown = false;
     public MountainTroll()
@@ -19,6 +15,10 @@ public class MountainTroll extends Enemy
         super(5,3,1);
     }
 
+    /**
+     * Act - do whatever the MountainTroll wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
     public void act()
     {
         if(isAlive)
@@ -32,6 +32,9 @@ public class MountainTroll extends Enemy
         }
     }
 
+    /**
+     * Inicia el combate con el jugador, cada subclase de enemigo ataca diferente
+     */
     public void engage()
     {
         lockOnPlayer();
@@ -39,7 +42,10 @@ public class MountainTroll extends Enemy
         if(waveSpawnOnCooldown)
             waveSpawnDelay();
     }
-    
+
+    /**
+     * Mantiene la direccion hacia el jugador
+     */
     public void lockOnPlayer()
     {
         if(isPlayerAtLeft)
@@ -51,6 +57,9 @@ public class MountainTroll extends Enemy
         }
     }
 
+    /**
+     * Gira la imagen para simular movimiento
+     */
     public void turnWhileWandering()
     {
         if(speed > 0)
@@ -62,6 +71,9 @@ public class MountainTroll extends Enemy
         }
     }
 
+    /**
+     * Hace aparecer ondas de choque con las que ataca
+     */
     public void spawnShockWaves()
     {
         if(!waveSpawnOnCooldown)
@@ -72,6 +84,9 @@ public class MountainTroll extends Enemy
         }
     }
 
+    /**
+     * Un pequeño delay entre ondas de choque
+     */
     public void waveSpawnDelay()
     {
         waveSpawnDelayCounter--;
