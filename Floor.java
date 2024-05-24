@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Floor here.
+ * Esta clase representa una instancia de la clase Floor
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class Floor extends Actor
 {
@@ -13,10 +13,7 @@ public class Floor extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     // El suelo sirve para nivelar a los personajes
-    public Floor()
-    {
-        //getImage().scale(getImage().getWidth()*6, getImage().getHeight()/3);
-    }
+    public Floor(){}
 
     public void act()
     {

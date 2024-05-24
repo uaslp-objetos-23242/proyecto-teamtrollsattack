@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class PlaceHolderBG here.
+ * Esta clase es el nivel 1 del juego
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class PlaceHolderBG extends World
 {
@@ -13,7 +13,6 @@ public class PlaceHolderBG extends World
      * Constructor for objects of class PlaceHolderBG.
      * 
      */
-    private int worldId = 1;
     Player player = new Player();
     public PlaceHolderBG()
     {    
@@ -43,18 +42,20 @@ public class PlaceHolderBG extends World
         addObject(player, 200, getHeight()/2 - 110);
     }
     
+    /**
+     * Agrega una instancia de la clase jugador
+     * @Param El jugador con sus datos actuales, como la salud
+     */
     public void addPlayer(Player player)
     {
         addObject(player, 50, 50);
     }
     
+    /**
+     * Agrega una instancia de la clase MainMenuButtons
+     */
     public void addControl(MainMenuButtons mmb)
     {
         addObject(mmb, 0, 0);
-    }
-    
-    public int getWorldId()
-    {
-        return worldId;
     }
 }

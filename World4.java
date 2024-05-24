@@ -1,18 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class World4 here.
+ * Esta clase es el nivel 4 del juego
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros 
+ * @version 1
  */
 public class World4 extends World
 {
-
-    /**
-     * Constructor for objects of class World4.
-     * 
-     */
     private int worldId = 4;
     /**
      * Constructor for objects of class World4.
@@ -43,13 +38,12 @@ public class World4 extends World
         addObject(trollGeneral,400,685);
     }
     
+    /**
+     * Agrega una instancia de la clase jugador
+     * @Param El jugador con sus datos actuales, como la salud
+     */
     public void addPlayer(Player player)
     {
         addObject(player, 1150, 90);
-    }
-    
-    public int getWorldId()
-    {
-        return worldId;
     }
 }

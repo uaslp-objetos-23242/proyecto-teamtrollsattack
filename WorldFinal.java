@@ -1,15 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class WorldFinal here.
+ * Esta clase es el ultimo nivel del juego
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros 
+ * @version 1
  */
 public class WorldFinal extends World
 {
 
-    private int worldId = 10;
     GreenfootSound risaTrollBoss = new GreenfootSound("Risa_Troll_Boss.mp3");
     private boolean risaYaActivada = false;
     /**
@@ -46,19 +45,21 @@ public class WorldFinal extends World
         addObject(trollBoss,800,620);
     }
     
+    /**
+     * Reproduce la risa del jefe final
+     */
     public void risa()
     {
         risaTrollBoss.play();
         risaYaActivada = true;
     }
 
+    /**
+     * Agrega una instancia de la clase jugador
+     * @Param El jugador con sus datos actuales, como la salud
+     */
     public void addPlayer(Player player)
     {
         addObject(player, 200, 95);
-    }
-
-    public int getWorldId()
-    {
-        return worldId;
     }
 }

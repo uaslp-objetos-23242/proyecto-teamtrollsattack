@@ -1,27 +1,30 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Stalactite here.
+ * Esta clase representa una estalactita filosa, una instancia de Stalactite
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class Stalactite extends Projectile
 {
+    public Stalactite(){}
+
     /**
      * Act - do whatever the Stalactite wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Stalactite(){}
-
     public void act()
     {
         setOriginalPosition();
         checkFalling();
-        despawnWaves();
+        despawnStalactite();
     }
 
-    public void despawnWaves()
+    /**
+     * Hace desaparecer las estalactitas
+     */
+    public void despawnStalactite()
     {
         int maxDistance = 50;
         if(getY() == originalYPos + maxDistance || isAtEdge() || isTouching(Floor.class))
@@ -29,6 +32,6 @@ public class Stalactite extends Projectile
             getWorld().removeObject(this);
         }
     }
-    
+
     public void turnWhileWandering(){}
 }

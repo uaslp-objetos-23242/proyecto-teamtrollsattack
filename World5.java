@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class World5 here.
+ * Esta clase es el nivel 5 del juego
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros 
+ * @version 1
  */
 public class World5 extends World
 {
@@ -13,7 +13,6 @@ public class World5 extends World
      * Constructor for objects of class World5.
      * 
      */
-    private int worldId = 5;
     public World5()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -48,13 +47,12 @@ public class World5 extends World
         addObject(invisibleWallRight3,255,175);
     }
 
+    /**
+     * Agrega una instancia de la clase jugador
+     * @Param El jugador con sus datos actuales, como la salud
+     */
     public void addPlayer(Player player)
     {
         addObject(player, 50, 90);
-    }
-
-    public int getWorldId()
-    {
-        return worldId;
     }
 }

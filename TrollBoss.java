@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class TrollBoss here.
+ * Esta clase representa una instancia de TrollBoss
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class TrollBoss extends Enemy
 {
@@ -13,10 +13,6 @@ public class TrollBoss extends Enemy
     private boolean alreadyScreamed = false;
     GreenfootSound screamTrollBoss = new GreenfootSound("Troll_Boss_muere.mp3");
     Goal goal = new Goal();
-    /**
-     * Act - do whatever the TrollBoss wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public TrollBoss(boolean isBoss)
     {
         super(6,1,5);
@@ -24,6 +20,10 @@ public class TrollBoss extends Enemy
             boss();
     }
 
+    /**
+     * Act - do whatever the TrollBoss wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
     public void act()
     {
         if(isAlive)
@@ -39,10 +39,13 @@ public class TrollBoss extends Enemy
         {
             if(!alreadyScreamed)
                 trollBossDeathScream();
-                getWorld().addObject(goal, 1150, 726);
+            getWorld().addObject(goal, 1150, 726);
         }
     }
 
+    /**
+     * Inicia el combate con el jugador, cada subclase de enemigo ataca diferente
+     */
     public void engage()
     {
         lockOnPlayer();
@@ -51,6 +54,9 @@ public class TrollBoss extends Enemy
             rockRainSpawnDelay();
     }
 
+    /**
+     * Hace aparecer estalactitas encima del jugador
+     */
     public void spawnRockRain()
     {
         if(!rockRainSpawnOnCooldown)
@@ -78,6 +84,9 @@ public class TrollBoss extends Enemy
         }
     }
 
+    /**
+     * Un delay entre aparicion de rocas
+     */
     public void rockRainSpawnDelay()
     {
         rockRainSpawnDelayCounter--;
@@ -88,6 +97,9 @@ public class TrollBoss extends Enemy
         }
     }
 
+    /**
+     * Mantiene la direccion hacia el jugador
+     */
     public void lockOnPlayer()
     {
         if(isPlayerAtLeft)
@@ -99,6 +111,9 @@ public class TrollBoss extends Enemy
         }
     }
 
+    /**
+     * Gira la imagen para simular movimiento
+     */
     public void turnWhileWandering()
     {
         if(speed > 0)
@@ -109,13 +124,19 @@ public class TrollBoss extends Enemy
             getImage().mirrorHorizontally();
         }
     }
-    
+
+    /**
+     * Hace que el TrollBoss grite al morir
+     */
     public void trollBossDeathScream()
     {
         screamTrollBoss.play();
         alreadyScreamed = true;
     }
 
+    /**
+     * Vuelve jefe al enemigo
+     */
     public void boss()
     {
         screamTrollBoss.setVolume(50);

@@ -1,18 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Player here.
+ * La clase jugador, la parte mas importante del juego
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
+ * @version 1
  */
 public class Player extends Entity
 {
-    /**
-     * Act - do whatever the Player wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-
     // Sobreescudo que tiene al entrar a una nueva sala
     private int armorPoints;
     // Puntos de experiencia para mejorar sus atributos
@@ -60,13 +55,14 @@ public class Player extends Entity
     // Lleva la cuenta de cuantos enemigos ha eliminado, se debe reiniciar por cada mundo
     private int worldKillCount = 0;
     private boolean isHardcore = false;
-    
+
     GreenfootSound espadazo = new GreenfootSound("espadazo.mp3");
 
     GreenfootSound covenantDance = new GreenfootSound("CovenantDance.mp3");
     GreenfootSound ragingInferno = new GreenfootSound("RagingInferno.mp3");
     Goal goal = new Goal();
-    /**que mas xd
+    /**
+     * El constructor, que mas xd
      */
     public Player()
     {
@@ -76,6 +72,11 @@ public class Player extends Entity
         espadazo.setVolume(40);
         //scaleDownImage(4, 4);
     }
+
+    /**
+     * Act - do whatever the Player wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
 
     public void act()
     {
@@ -248,6 +249,9 @@ public class Player extends Entity
         }
     }
 
+    /**
+     * Da un efecto de parpadeo al jugador al ser dañado
+     */
     public void inivicibilityIndicator()
     {
         if(invincibilityFrames % 3 == 0 && playerInvincible)
@@ -318,6 +322,9 @@ public class Player extends Entity
         getWorld().showText("armor: " + armorPoints, 50, 70);
     }
 
+    /**
+     * Cambia de mundo conservando al jugador
+     */
     public void changeWorld()
     {   Actor goalHole = getOneObjectAtOffset(0, 0, Goal.class);
         if(goalHole != null)
@@ -372,6 +379,9 @@ public class Player extends Entity
         }
     }
 
+    /**
+     * Hace aparecer el agujero para avanzar de mundo
+     */
     public void spawnGoal()
     {
         switch(actualWorld)
@@ -424,6 +434,9 @@ public class Player extends Entity
         }
     }
 
+    /**
+     * Hace que el jugador sea empujado por paredes invisibles
+     */
     public void getPushedByInvisibleWalls()
     {
         if(isTouching(InvisibleWallLeft.class))
@@ -460,6 +473,9 @@ public class Player extends Entity
         return attackAnimation;
     }
 
+    /**
+     * Configura la dificultad
+     */
     public void setDifficulty(boolean hardcore)
     {
         if(hardcore)
@@ -489,6 +505,9 @@ public class Player extends Entity
         }
     }
 
+    /**
+     * Aumenta la cantidad de enemigos eliminados por mundo
+     */
     public void increaseWorldKillCount()
     {
         worldKillCount++;
