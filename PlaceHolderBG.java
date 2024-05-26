@@ -13,7 +13,7 @@ public class PlaceHolderBG extends World
      * Constructor for objects of class PlaceHolderBG.
      * 
      */
-    Player player = new Player();
+    private Player player = new Player();
     public PlaceHolderBG()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.

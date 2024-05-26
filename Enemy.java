@@ -6,23 +6,23 @@ import java.util.List;
  * @author Miguel Angel Enriquez Cisneros y Joaquin Manuel Trujillo Viveros
  * @version 1
  */
-public abstract class Enemy extends Entity
+public class Enemy extends Entity
 {
-    int mun, band;
+    private int mun, band;
     //Si es jefe, tebdra atributos especiales como daño y vida aumentados
-    protected boolean isBoss = false;
+    private boolean isBoss = false;
 
     //Si el jugador se encuentra en el radio del enemigo
-    protected boolean isPlayerInSight = false;
-    protected boolean isPlayerAtLeft;
+    private boolean isPlayerInSight = false;
+    private boolean isPlayerAtLeft;
 
     //Guarda las posiciones originales de los enemigos para que patrullen al rededor
-    protected int originalXPos = -1;
-    protected int originalYPos = -1;
+    private int originalXPos = -1;
+    private int originalYPos = -1;
 
-    protected boolean enemyInvincible = false;
+    private boolean enemyInvincible = false;
     // Tiempo que el jugador es invencile despues de recibir daño
-    protected int enemyInvincibilityFrames = 30;
+    private int enemyInvincibilityFrames = 30;
 
     public Enemy(int health, int damageDealt, int speed)
     {
@@ -40,40 +40,6 @@ public abstract class Enemy extends Entity
     {
 
     }
-
-    /**
-     * Hace que el objeto de la clase se mueva de un lado a otro en un rango determinado
-     * @Param maxLeftDistance Distancia maxima a la que puede moverse el enemigo hacia la izquierda desde su punto de origen
-     * @Param maxRightDistance Distancia maxima a la que puede moverse el enemigo hacia la derecha desde su punto de origen
-     * @Param detectionRange Es la distancia a la que el enemigo puede llegar a ver al jugador
-     */
-    public void wander(int maxLeftDistance, int maxRightDistance, int detectionRange)
-    {
-        setOriginalPosition();
-        lookingForPlayer(detectionRange);
-        if(!isPlayerInSight)
-        {
-            setLocation(getX() - speed, getY());
-            if(getX() == originalXPos - maxLeftDistance || getX() == originalXPos + maxRightDistance || isAtEdge())
-            {
-                speed *= -1;
-                turnWhileWandering();
-            }
-            setRotation(0);
-        }
-        else
-            engage();
-    }
-
-    /**
-     * Inicia el combate con el jugador, cada subclase de enemigo ataca diferente
-     */
-    public abstract void engage();
-
-    /**
-     * Gira la imagen para simular movimiento
-     */
-    public abstract void turnWhileWandering();
 
     /**
      * Regresa true si el jugador esta cerca y false si no
@@ -147,14 +113,14 @@ public abstract class Enemy extends Entity
     public void getDamaged()
     {   
         //Actor player = getOneObjectAtOffset(0, 0, Player.class);
-        if(isTouching(Player.class) && getPlayerInfo().getAttackAnimation() && this.health >= 1 && !enemyInvincible)
+        if(isTouching(Player.class) && getPlayerInfo().getAttackAnimation() && getHealth() >= 1 && !enemyInvincible)
         {
-            this.health--;
+            setHealth(getHealth() - 1);
             enemyInvincible = true;
         }
-        if(this.health < 1)
+        if(getHealth() < 1)
         {
-            isAlive = false;
+            setIsAlive(false);
             despawnOnDeath();
         }
     }
@@ -194,16 +160,110 @@ public abstract class Enemy extends Entity
         //getWorld().showText("Player nerby: " + playerIsNearby(200), 700, 90);
         getWorld().showText("Distance from player: " + (getPlayerInfo().getX() - getX()), 700, 110);
         getWorld().showText("Player at left: " + isPlayerAtLeft, 700, 130);
-        getWorld().showText("Enemy health: " + this.health, 700, 150);
+        getWorld().showText("Enemy health: " + getHealth(), 700, 150);
         getWorld().showText("Original X pos: " + originalXPos, 900, 130);
         getWorld().showText("Original Y pos: " + originalYPos, 900, 150);
     }
 
     public void Recargar()
     {
-        if (this.mun<1&&cont2%100==0)
+        if (this.mun<1 && getCont2() % 100 == 0)
             this.mun=1;
-        cont2++;
+        setCont2(getCont2() + 1);
+    }
+    
+    /**
+     * Setters y getters
+     */
+    
+    public void setMun(int mun)
+    {
+        this.mun = mun;
+    }
+    
+    public void setBand(int band)
+    {
+        this.band = band;
+    }
+    
+    public void setIsBoss(boolean isBoss)
+    {
+        this.isBoss = isBoss;
+    }
+    
+    public void setIsPlayerInSight(boolean isPlayerInSight)
+    {
+        this.isPlayerInSight = isPlayerInSight;
+    }
+    
+    public void setIsPlayerAtLeft(boolean isPlayerAtLeft)
+    {
+        this.isPlayerAtLeft = isPlayerInSight;
+    }
+    
+    public void setOriginalXPos(int originalXPos)
+    {
+        this.originalXPos = originalXPos;
+    }
+    
+    public void setOriginalYPos(int originalYPos)
+    {
+        this.originalYPos = originalYPos;
+    }
+    
+    public void setEnemyInvincible(boolean enemyInvincible)
+    {
+        this.enemyInvincible = enemyInvincible;
+    }
+    
+    public void setEnemyInvincibilityFrames(int enemyInvincibilityFrames)
+    {
+        this.enemyInvincibilityFrames = enemyInvincibilityFrames;
+    }
+    
+    public int getMun()
+    {
+        return mun;
+    }
+    
+    public int getBand()
+    {
+        return band;
+    }
+    
+    public boolean getIsBoss()
+    {
+        return isBoss;
+    }
+    
+    public boolean getIsPlayerInSight()
+    {
+        return isPlayerInSight;
+    }
+    
+    public boolean getIsPlayerAtLeft()
+    {
+        return isPlayerAtLeft;
+    }
+    
+    public int getOriginalXPos()
+    {
+        return originalXPos;
+    }
+    
+    public int getOriginalYPos()
+    {
+        return originalYPos;
+    }
+    
+    public boolean getEnemyInvincible()
+    {
+        return enemyInvincible;
+    }
+    
+    public int getEnemyInvincibilityFrames()
+    {
+        return enemyInvincibilityFrames;
     }
 }
 

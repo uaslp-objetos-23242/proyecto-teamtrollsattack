@@ -49,7 +49,7 @@ public class Slash extends Projectile
     public void despawnSlash()
     {
         int maxDistance = 200;
-        if(getX() == originalXPos - maxDistance || getX() == originalXPos + maxDistance || isAtEdge())
+        if(getX() == getOriginalXPos() - maxDistance || getX() == getOriginalXPos() + maxDistance || isAtEdge())
         {
             getWorld().removeObject(this);
         }
@@ -64,6 +64,4 @@ public class Slash extends Projectile
             getImage().mirrorHorizontally();
         spriteSet = true;
     }
-
-    public void turnWhileWandering(){}
 }

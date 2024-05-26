@@ -60,11 +60,9 @@ public class Shockwave extends Projectile
     public void despawnWaves()
     {
         int maxDistance = 200;
-        if(getX() == originalXPos - maxDistance || getX() == originalXPos + maxDistance || isAtEdge())
+        if(getX() == getOriginalXPos() - maxDistance || getX() == getOriginalXPos() + maxDistance || isAtEdge())
         {
             getWorld().removeObject(this);
         }
     }
-
-    public void turnWhileWandering(){}
 }

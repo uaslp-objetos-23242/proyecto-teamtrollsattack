@@ -26,21 +26,45 @@ public class TrollBoss extends Enemy
      */
     public void act()
     {
-        if(isAlive)
+        if(getIsAlive())
         {
             checkFalling();
             checkForPlayerAtLeft();
             wander(100, 100, 200);
             getDamaged();
-            if(enemyInvincible)
+            if(getEnemyInvincible())
                 enemyInvincibilityTimer();
         }
-        else if(!isAlive && isBoss)
+        else if(!getIsAlive() && getIsBoss())
         {
             if(!alreadyScreamed)
                 trollBossDeathScream();
             getWorld().addObject(goal, 1150, 726);
         }
+    }
+    
+    /**
+     * Hace que el objeto de la clase se mueva de un lado a otro en un rango determinado
+     * @Param maxLeftDistance Distancia maxima a la que puede moverse el enemigo hacia la izquierda desde su punto de origen
+     * @Param maxRightDistance Distancia maxima a la que puede moverse el enemigo hacia la derecha desde su punto de origen
+     * @Param detectionRange Es la distancia a la que el enemigo puede llegar a ver al jugador
+     */
+    public void wander(int maxLeftDistance, int maxRightDistance, int detectionRange)
+    {
+        setOriginalPosition();
+        lookingForPlayer(detectionRange);
+        if(!getIsPlayerInSight())
+        {
+            setLocation(getX() - getSpeed(), getY());
+            if(getX() == getOriginalXPos() - maxLeftDistance || getX() == getOriginalXPos() + maxRightDistance || isAtEdge())
+            {
+                setSpeed(getSpeed() * -1);
+                turnWhileWandering();
+            }
+            setRotation(0);
+        }
+        else
+            engage();
     }
 
     /**
@@ -61,7 +85,7 @@ public class TrollBoss extends Enemy
     {
         if(!rockRainSpawnOnCooldown)
         {
-            if(isPlayerAtLeft)
+            if(getIsPlayerAtLeft())
             {
                 getWorld().addObject(new Stalactite(), getX() - 100, getY() + getImage().getHeight() * -1);
                 getWorld().addObject(new Stalactite(), getX() - 120, getY() + getImage().getHeight() * -1);
@@ -102,7 +126,7 @@ public class TrollBoss extends Enemy
      */
     public void lockOnPlayer()
     {
-        if(isPlayerAtLeft)
+        if(getIsPlayerAtLeft())
             setImage("Troll_boss.png");
         else
         {
@@ -116,7 +140,7 @@ public class TrollBoss extends Enemy
      */
     public void turnWhileWandering()
     {
-        if(speed > 0)
+        if(getSpeed() > 0)
             setImage("Troll_boss.png");
         else
         {
@@ -140,7 +164,7 @@ public class TrollBoss extends Enemy
     public void boss()
     {
         screamTrollBoss.setVolume(50);
-        this.health = 12;
-        isBoss = true;
+        setHealth(12);
+        setIsBoss(true);
     }
 }

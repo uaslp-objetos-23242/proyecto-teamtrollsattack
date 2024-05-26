@@ -21,15 +21,39 @@ public class MountainTroll extends Enemy
      */
     public void act()
     {
-        if(isAlive)
+        if(getIsAlive())
         {
             checkFalling();
             checkForPlayerAtLeft();
             wander(200, 200, 200);
             getDamaged();
-            if(enemyInvincible)
+            if(getEnemyInvincible())
                 enemyInvincibilityTimer();
         }
+    }
+    
+    /**
+     * Hace que el objeto de la clase se mueva de un lado a otro en un rango determinado
+     * @Param maxLeftDistance Distancia maxima a la que puede moverse el enemigo hacia la izquierda desde su punto de origen
+     * @Param maxRightDistance Distancia maxima a la que puede moverse el enemigo hacia la derecha desde su punto de origen
+     * @Param detectionRange Es la distancia a la que el enemigo puede llegar a ver al jugador
+     */
+    public void wander(int maxLeftDistance, int maxRightDistance, int detectionRange)
+    {
+        setOriginalPosition();
+        lookingForPlayer(detectionRange);
+        if(!getIsPlayerInSight())
+        {
+            setLocation(getX() - getSpeed(), getY());
+            if(getX() == getOriginalXPos() - maxLeftDistance || getX() == getOriginalXPos() + maxRightDistance || isAtEdge())
+            {
+                setSpeed(getSpeed() * -1);
+                turnWhileWandering();
+            }
+            setRotation(0);
+        }
+        else
+            engage();
     }
 
     /**
@@ -48,7 +72,7 @@ public class MountainTroll extends Enemy
      */
     public void lockOnPlayer()
     {
-        if(isPlayerAtLeft)
+        if(getIsPlayerAtLeft())
             setImage("Mountain_Troll.png");
         else
         {
@@ -62,7 +86,7 @@ public class MountainTroll extends Enemy
      */
     public void turnWhileWandering()
     {
-        if(speed > 0)
+        if(getSpeed() > 0)
             setImage("Mountain_Troll.png");
         else
         {
