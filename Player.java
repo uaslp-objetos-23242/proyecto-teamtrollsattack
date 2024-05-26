@@ -41,26 +41,24 @@ public class Player extends Entity
     // Guarda y muestra el numero de mundo en el que se encuentra
     private int actualWorld = 1;
     // Mundos por si se ocupa algo
-    World2 w2 = new World2();
-    World3 w3 = new World3();
-    World4 w4 = new World4();
-    World5 w5 = new World5();
-    World6 w6 = new World6();
-    World7 w7 = new World7();
-    World8 w8 = new World8();
-    World9 w9 = new World9();
-    WorldFinal wf = new WorldFinal();
-    GameOver go = new GameOver();
-    YouWin win = new YouWin();
+    private World2 w2 = new World2();
+    private World3 w3 = new World3();
+    private World4 w4 = new World4();
+    private World5 w5 = new World5();
+    private World6 w6 = new World6();
+    private World7 w7 = new World7();
+    private World8 w8 = new World8();
+    private World9 w9 = new World9();
+    private WorldFinal wf = new WorldFinal();
+    private GameOver go = new GameOver();
+    private YouWin win = new YouWin();
     // Lleva la cuenta de cuantos enemigos ha eliminado, se debe reiniciar por cada mundo
     private int worldKillCount = 0;
     private boolean isHardcore = false;
 
-    GreenfootSound espadazo = new GreenfootSound("espadazo.mp3");
-
-    GreenfootSound covenantDance = new GreenfootSound("CovenantDance.mp3");
-    GreenfootSound ragingInferno = new GreenfootSound("RagingInferno.mp3");
-    Goal goal = new Goal();
+    private GreenfootSound espadazo = new GreenfootSound("espadazo.mp3");
+    
+    private Goal goal = new Goal();
     /**
      * El constructor, que mas xd
      */
@@ -80,9 +78,8 @@ public class Player extends Entity
 
     public void act()
     {
-        if(isAlive)
+        if(getIsAlive())
         {
-            playBackgroundMusic();
             checkFalling();
             getPushedByInvisibleWalls();
             debugHud();
@@ -105,8 +102,6 @@ public class Player extends Entity
         {
             getWorld().removeObject(this);
             Greenfoot.setWorld(go);
-            covenantDance.stop();
-            ragingInferno.stop();
         }
     }
 
@@ -120,19 +115,19 @@ public class Player extends Entity
         int y = getY();
         if(Greenfoot.isKeyDown("d") && !usingShield && !attackAnimation)
         {
-            setLocation(x + speed, y);
+            setLocation(x + getSpeed(), y);
             facingLeft = false;
             moveAnimation();
         }
         if(Greenfoot.isKeyDown("a") && !usingShield && !attackAnimation)
         {
-            setLocation(x - speed, y);
+            setLocation(x - getSpeed(), y);
             facingLeft = true;
             moveAnimation();
         }
         if(Greenfoot.isKeyDown("space") && !usingShield && !attackAnimation && !jumpPressed && onGround())
         {
-            vSpeed = jumpHeight;
+            setVSpeed(jumpHeight);
             fall();
             jumpPressed = true;
         }
@@ -213,12 +208,12 @@ public class Player extends Entity
                 armorPoints--;
                 playerInvincible = true;
             }
-            else if(this.health > 0)
+            else if(getHealth() > 0)
             {
-                this.health--;
+                setHealth(getHealth() - 1);
                 playerInvincible = true;
-                if(this.health == 0)
-                    isAlive = false;
+                if(getHealth() <= 0)
+                    setIsAlive(false);
             }
         }
     }
@@ -318,7 +313,7 @@ public class Player extends Entity
      */
     public void hud()
     {
-        getWorld().showText("health: " + health, 50, 50);
+        getWorld().showText("health: " + getHealth(), 50, 50);
         getWorld().showText("armor: " + armorPoints, 50, 70);
     }
 
@@ -370,8 +365,6 @@ public class Player extends Entity
                     Greenfoot.setWorld(wf);
                     break;
                 case 10:
-                    covenantDance.stop();
-                    ragingInferno.stop();
                     Greenfoot.setWorld(win);
                     break;                    
             }
@@ -440,12 +433,12 @@ public class Player extends Entity
     public void getPushedByInvisibleWalls()
     {
         if(isTouching(InvisibleWallLeft.class))
-            setLocation(getX() - speed * 2, getY());
+            setLocation(getX() - getSpeed() * 2, getY());
         if(isTouching(InvisibleWallRight.class))
-            setLocation(getX() + speed * 2, getY());
+            setLocation(getX() + getSpeed() * 2, getY());
         if(isTouching(InvisibleCeiling.class))
         {   
-            vSpeed = 0;
+            setVSpeed(0);
             setLocation(getX(), getY() + 1);
         }
     }
@@ -480,30 +473,14 @@ public class Player extends Entity
     {
         if(hardcore)
         {
-            this.health = 5;
-            this.damageDealt = 2;
-            this.speed = 8;
+            setHealth(5);
+            setDamageDealt(2);
+            setSpeed(8);
             this.armorPoints = 1;
             isHardcore = true;
         }
     }
 
-    /**
-     * Reproduce musica de fondo
-     */
-    public void playBackgroundMusic()
-    {
-        if(!isHardcore)
-        {
-            covenantDance.setVolume(30);
-            covenantDance.playLoop();
-        }
-        else
-        {
-            ragingInferno.setVolume(30);
-            ragingInferno.playLoop();
-        }
-    }
 
     /**
      * Aumenta la cantidad de enemigos eliminados por mundo

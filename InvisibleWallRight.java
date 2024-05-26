@@ -11,7 +11,7 @@ public class InvisibleWallRight extends InvisibleWall
     public InvisibleWallRight(int ancho, int alto)
     {
         getImage().scale(ancho, alto);
-        if(turnBlocksInvisible)
+        if(getTurnBlocksInvisible())
             turnInvisible();
     }
 

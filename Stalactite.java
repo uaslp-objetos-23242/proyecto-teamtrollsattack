@@ -27,11 +27,9 @@ public class Stalactite extends Projectile
     public void despawnStalactite()
     {
         int maxDistance = 50;
-        if(getY() == originalYPos + maxDistance || isAtEdge() || isTouching(Floor.class))
+        if(getY() == getOriginalYPos() + maxDistance || isAtEdge() || isTouching(Floor.class))
         {
             getWorld().removeObject(this);
         }
     }
-
-    public void turnWhileWandering(){}
 }

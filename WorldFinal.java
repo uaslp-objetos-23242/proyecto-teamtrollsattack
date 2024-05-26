@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class WorldFinal extends World
 {
 
-    GreenfootSound risaTrollBoss = new GreenfootSound("Risa_Troll_Boss.mp3");
+    private GreenfootSound risaTrollBoss = new GreenfootSound("Risa_Troll_Boss.mp3");
     private boolean risaYaActivada = false;
     /**
      * Constructor for objects of class WorldFinal.

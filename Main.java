@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Main extends World
 {
 
-    MainMenuButtons mmb = new MainMenuButtons();
+    private MainMenuButtons mmb = new MainMenuButtons();
     /**
      * Constructor for objects of class Main.
      * 

@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class InvisibleWall extends Actor
 {
-    public boolean turnBlocksInvisible = true;
+    private boolean turnBlocksInvisible = true;
     
     /**
      * Act - do whatever the InvisibleWallLeft wants to do. This method is called whenever
@@ -25,5 +25,10 @@ public class InvisibleWall extends Actor
     public void turnInvisible()
     {
         getImage().setTransparency(0);
+    }
+    
+    public boolean getTurnBlocksInvisible()
+    {
+        return turnBlocksInvisible;
     }
 }

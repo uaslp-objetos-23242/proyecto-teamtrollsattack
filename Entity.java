@@ -10,16 +10,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public abstract class Entity extends Actor
 {
     //La entidad unifica aspectos que todos comparte como salud, daño y velocidad, obvio varia por personaje
-    protected int health;
-    protected int damageDealt;
-    protected int speed;
+    private int health;
+    private int damageDealt;
+    private int speed;
 
-    protected int vSpeed = 0;
-    protected int acceleration = 1;
+    private int vSpeed = 0;
+    private int acceleration = 1;
 
     //Estado de la entidad, vivo o muerto, no creo se ocupe pero por si acaso
-    protected boolean isAlive;
-    protected int cont2;
+    private boolean isAlive;
+    private int cont2;
     public Entity(int health, int damageDealt, int speed)
     {
         this.health = health;
@@ -80,4 +80,77 @@ public abstract class Entity extends Actor
      * Muestra informacion oculta en pantalla para debugear
      */
     public abstract void debugHud();
+    
+    /**
+     * Setters y getters
+     */
+    public void setHealth(int health)
+    {
+        this.health = health;
+    }
+    
+    public void setDamageDealt(int damageDealt)
+    {
+        this.damageDealt = damageDealt;
+    }
+    
+    public void setSpeed(int speed)
+    {
+        this.speed = speed;
+    }
+    
+    public void setVSpeed(int vSpeed)
+    {
+        this.vSpeed = vSpeed;
+    }
+    
+    public void setAcceleration(int acceleration)
+    {
+        this.acceleration = acceleration;
+    }
+    
+    public void setIsAlive(boolean isAlive)
+    {
+        this.isAlive = isAlive;
+    }
+    
+    public void setCont2(int cont2)
+    {
+        this.cont2 = cont2;
+    }
+    
+    public int getHealth()
+    {
+        return health;
+    }
+    
+    public int getDamageDelt()
+    {
+        return damageDealt;
+    }
+    
+    public int getSpeed()
+    {
+        return speed;
+    }
+    
+    public int getVSpeed()
+    {
+        return vSpeed;
+    }
+    
+    public int getAcceleration()
+    {
+        return acceleration;
+    }
+    
+    public boolean getIsAlive()
+    {
+        return isAlive;
+    }
+    
+    public int getCont2()
+    {
+        return cont2;
+    }
 }

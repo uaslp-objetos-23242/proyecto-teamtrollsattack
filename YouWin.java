@@ -8,8 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class YouWin extends World
 {
-
-    GreenfootSound v = new GreenfootSound("Victory.mp3");
     /**
      * Constructor for objects of class YouWin.
      * 
@@ -19,12 +17,6 @@ public class YouWin extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1280, 720, 1);
         prepare();
-        v.setVolume(50);
-    }
-    
-    public void act()
-    {
-        v.play();
     }
     
     public void prepare()

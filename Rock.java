@@ -23,19 +23,11 @@ public class Rock extends Projectile
     }
 
     /**
-     * Inicia el combate con el jugador, cada subclase de enemigo ataca diferente
-     */
-    public void engage()
-    {
-
-    }
-
-    /**
      * Direccion y velocidad del proyectil
      */
     public void Movimiento()
     {
-        if (isPlayerAtLeft==true)
+        if (getIsPlayerAtLeft())
         {    
             //setRotation(180);
             move(-10);
@@ -45,7 +37,7 @@ public class Rock extends Projectile
             move(10);
         }
 
-        if(isAtEdge()==true)
+        if(isAtEdge())
         {
             getWorld().removeObject(this);
         }
@@ -53,12 +45,10 @@ public class Rock extends Projectile
 
     public void check()
     {
-        if (checkDir==false)
+        if (!checkDir)
         {
             checkForPlayerAtLeft();
             checkDir=true;
         }
     }
-
-    public void turnWhileWandering(){}
 }

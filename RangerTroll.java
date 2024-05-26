@@ -20,16 +20,40 @@ public class RangerTroll extends Enemy
      */
     public void act()
     {
-        if(isAlive)
+        if(getIsAlive())
         {
             setOriginalPosition();
             checkFalling();
             getDamaged();
             wander(50,50,600);
             checkForPlayerAtLeft();
-            if(enemyInvincible)
+            if(getEnemyInvincible())
                 enemyInvincibilityTimer();
         }
+    }
+    
+    /**
+     * Hace que el objeto de la clase se mueva de un lado a otro en un rango determinado
+     * @Param maxLeftDistance Distancia maxima a la que puede moverse el enemigo hacia la izquierda desde su punto de origen
+     * @Param maxRightDistance Distancia maxima a la que puede moverse el enemigo hacia la derecha desde su punto de origen
+     * @Param detectionRange Es la distancia a la que el enemigo puede llegar a ver al jugador
+     */
+    public void wander(int maxLeftDistance, int maxRightDistance, int detectionRange)
+    {
+        setOriginalPosition();
+        lookingForPlayer(detectionRange);
+        if(!getIsPlayerInSight())
+        {
+            setLocation(getX() - getSpeed(), getY());
+            if(getX() == getOriginalXPos() - maxLeftDistance || getX() == getOriginalXPos() + maxRightDistance || isAtEdge())
+            {
+                setSpeed(getSpeed() * -1);
+                turnWhileWandering();
+            }
+            setRotation(0);
+        }
+        else
+            engage();
     }
 
     /**
@@ -38,7 +62,7 @@ public class RangerTroll extends Enemy
     public void engage()
     {
         lockOnPlayer();
-        if(this.mun>0)
+        if(getMun() > 0)
         {
             Dispara();
         }
@@ -54,7 +78,7 @@ public class RangerTroll extends Enemy
      */
     public void lockOnPlayer()
     {
-        if(isPlayerAtLeft)
+        if(getIsPlayerAtLeft())
             setImage("Troll_ranger3.png");
         else
         {
@@ -68,7 +92,7 @@ public class RangerTroll extends Enemy
      */
     public void turnWhileWandering()
     {
-        if(speed > 0)
+        if(getSpeed() > 0)
             setImage("Troll_ranger3.png");
         else
         {
@@ -83,6 +107,6 @@ public class RangerTroll extends Enemy
     public void Dispara()
     {
         getWorld().addObject(new Rock(), getX(), getY());
-        mun --;
+        setMun(getMun() - 1);
     }
 }
