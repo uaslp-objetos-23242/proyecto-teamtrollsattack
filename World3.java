@@ -15,7 +15,7 @@ public class World3 extends World
     public World3()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1200, 800, 1);
+        super(640,460, 1);
         prepare();
     }
     
@@ -25,18 +25,17 @@ public class World3 extends World
         Floor floorInicial = new Floor();
         Floor floor = new Floor();
         Floor floor2 = new Floor();
-        MountainTroll mt = new MountainTroll();
-        addObject(mt, 600, 450);
-        addObject(floorInicial, 200, 800);
-        addObject(floor, 600, 600);
-        addObject(floor2, 1000, 800);
         Relleno relleno = new Relleno();
-        addObject(relleno,767,715);
-        relleno.setLocation(606,692);
-        InvisibleWallLeft invisibleWallLeft = new InvisibleWallLeft(40, 300);
-        addObject(invisibleWallLeft,405,700);
-        InvisibleWallRight invisibleWallRight = new InvisibleWallRight(40, 300);
-        addObject(invisibleWallRight,790,700);
+        MountainTroll mt = new MountainTroll();
+        InvisibleWallLeft invisibleWallLeft = new InvisibleWallLeft(40, 150);
+        InvisibleWallRight invisibleWallRight = new InvisibleWallRight(40, 150);
+        addObject(floorInicial, 100, 460);
+        addObject(floor, 318, 380);
+        addObject(floor2, 533, 460);
+        addObject(relleno,318,450);
+        addObject(invisibleWallLeft,230,445);
+        addObject(invisibleWallRight,405,445);
+        addObject(mt, 318, 310);
     }
     
     /**
@@ -45,6 +44,6 @@ public class World3 extends World
      */
     public void addPlayer(Player player)
     {
-        addObject(player, 200, 690);
+        addObject(player, 100, 400);
     }
 }

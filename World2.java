@@ -15,7 +15,7 @@ public class World2 extends World
     public World2()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1200, 800, 1); 
+        super(640,460, 1); 
         prepare();
     }
 
@@ -27,13 +27,13 @@ public class World2 extends World
         Floor floor2 = new Floor();
         Floor floor3 = new Floor();
         RangerTroll rt = new RangerTroll();
-        InvisibleWallRight invisibleWallRight = new InvisibleWallRight(100, 100);
-        addObject(rt, 1000, 690);
-        addObject(floorInicial, 1100, 300);
-        addObject(floor, 200, 700);
-        addObject(floor2, 600, 800);
-        addObject(floor3, 1000, 800);
-        addObject(invisibleWallRight,368,718);
+        InvisibleWallRight invisibleWallRight = new InvisibleWallRight(50, 50);
+        addObject(floorInicial, 600, 150);
+        addObject(floor, 100, 420);
+        addObject(floor2, 315, 460);
+        addObject(floor3, 533, 460);
+        addObject(invisibleWallRight,183,427);
+        addObject(rt, 533, 400);
     }
 
     /**
@@ -42,6 +42,6 @@ public class World2 extends World
      */
     public void addPlayer(Player player)
     {
-        addObject(player, 1100, 190);
+        addObject(player, 580, 60);
     }
 }

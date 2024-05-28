@@ -11,8 +11,8 @@ public class TrollBoss extends Enemy
     private int rockRainSpawnDelayCounter = 200;
     private boolean rockRainSpawnOnCooldown = false;
     private boolean alreadyScreamed = false;
-    GreenfootSound screamTrollBoss = new GreenfootSound("Troll_Boss_muere.mp3");
-    Goal goal = new Goal();
+    private GreenfootSound screamTrollBoss = new GreenfootSound("Troll_Boss_muere.mp3");
+    private Goal goal = new Goal();
     public TrollBoss(boolean isBoss)
     {
         super(6,1,5);
@@ -30,7 +30,7 @@ public class TrollBoss extends Enemy
         {
             checkFalling();
             checkForPlayerAtLeft();
-            wander(100, 100, 200);
+            wander(200, 200, 250);
             getDamaged();
             if(getEnemyInvincible())
                 enemyInvincibilityTimer();
@@ -39,10 +39,10 @@ public class TrollBoss extends Enemy
         {
             if(!alreadyScreamed)
                 trollBossDeathScream();
-            getWorld().addObject(goal, 1150, 726);
+            getWorld().addObject(goal, 600,416);
         }
     }
-    
+
     /**
      * Hace que el objeto de la clase se mueva de un lado a otro en un rango determinado
      * @Param maxLeftDistance Distancia maxima a la que puede moverse el enemigo hacia la izquierda desde su punto de origen
@@ -85,26 +85,12 @@ public class TrollBoss extends Enemy
     {
         if(!rockRainSpawnOnCooldown)
         {
-            if(getIsPlayerAtLeft())
-            {
-                getWorld().addObject(new Stalactite(), getX() - 100, getY() + getImage().getHeight() * -1);
-                getWorld().addObject(new Stalactite(), getX() - 120, getY() + getImage().getHeight() * -1);
-                getWorld().addObject(new Stalactite(), getX() - 140, getY() + getImage().getHeight() * -1);
-                getWorld().addObject(new Stalactite(), getX() - 160, getY() + getImage().getHeight() * -1);
-                getWorld().addObject(new Stalactite(), getX() - 180, getY() + getImage().getHeight() * -1);
-                getWorld().addObject(new Stalactite(), getX() - 200, getY() + getImage().getHeight() * -1);
-                rockRainSpawnOnCooldown = true;
-            }
-            else
-            {
-                getWorld().addObject(new Stalactite(), getX() + 100, getY() + getImage().getHeight() * -1);
-                getWorld().addObject(new Stalactite(), getX() + 120, getY() + getImage().getHeight() * -1);
-                getWorld().addObject(new Stalactite(), getX() + 140, getY() + getImage().getHeight() * -1);
-                getWorld().addObject(new Stalactite(), getX() + 160, getY() + getImage().getHeight() * -1);
-                getWorld().addObject(new Stalactite(), getX() + 180, getY() + getImage().getHeight() * -1);
-                getWorld().addObject(new Stalactite(), getX() + 200, getY() + getImage().getHeight() * -1);
-                rockRainSpawnOnCooldown = true;
-            }
+            getWorld().addObject(new Stalactite(), getPlayerInfo().getX() - 30, getPlayerInfo().getY() + getImage().getHeight() * -1);
+            getWorld().addObject(new Stalactite(), getPlayerInfo().getX() - 15, getPlayerInfo().getY() + getImage().getHeight() * -1);
+            getWorld().addObject(new Stalactite(), getPlayerInfo().getX(), getPlayerInfo().getY() + getImage().getHeight() * -1);
+            getWorld().addObject(new Stalactite(), getPlayerInfo().getX() + 15, getPlayerInfo().getY() + getImage().getHeight() * -1);
+            getWorld().addObject(new Stalactite(), getPlayerInfo().getX() + 30, getPlayerInfo().getY() + getImage().getHeight() * -1);
+            rockRainSpawnOnCooldown = true;
         }
     }
 

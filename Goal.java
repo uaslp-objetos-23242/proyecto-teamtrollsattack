@@ -14,7 +14,7 @@ public class Goal extends Actor
      */
     public Goal()
     {
-        getImage().scale(getImage().getWidth()/8, getImage().getHeight()/8);
+        
     }
     
     public void act()

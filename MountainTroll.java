@@ -25,7 +25,7 @@ public class MountainTroll extends Enemy
         {
             checkFalling();
             checkForPlayerAtLeft();
-            wander(200, 200, 200);
+            wander(100, 100, 100);
             getDamaged();
             if(getEnemyInvincible())
                 enemyInvincibilityTimer();

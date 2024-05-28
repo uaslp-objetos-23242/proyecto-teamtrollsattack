@@ -16,7 +16,7 @@ public class World9 extends World
     public World9()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1200, 800, 1);
+        super(640,460, 1);
         prepare();
     }
     
@@ -33,26 +33,26 @@ public class World9 extends World
         TrollGeneral trollGeneral = new TrollGeneral();
         TrollGeneral trollGeneral2 = new TrollGeneral();
         RangerTroll rangerTroll = new RangerTroll();
-        addObject(floorInicial, 1150, 200);
-        addObject(floor, 200, 800);
-        addObject(floor2, 600, 800);
-        addObject(floor3, 1000, 800);
-        addObject(floor4, 720, 240);
-        addObject(floor5, 200, 550);
-        addObject(floor6, 600, 550);
-        addObject(trollGeneral,415,432);
-        addObject(trollGeneral2,810,684);
-        addObject(rangerTroll,440,679);
-        InvisibleCeiling invisibleCeiling = new InvisibleCeiling(900, 30);
-        addObject(invisibleCeiling,353,574);
-        InvisibleWallRight invisibleWallRight = new InvisibleWallRight(25, 70);
-        addObject(invisibleWallRight,795, 547);
-        InvisibleWallLeft invisibleWallLeft = new InvisibleWallLeft(25, 55);
-        addObject(invisibleWallLeft,945,182);
+        InvisibleCeiling invisibleCeiling = new InvisibleCeiling(440, 30);
+        InvisibleCeiling invisibleCeiling2 = new InvisibleCeiling(200, 30);
+        InvisibleWallRight invisibleWallRight = new InvisibleWallRight(25, 30);
+        InvisibleWallLeft invisibleWallLeft = new InvisibleWallLeft(25, 20);
         InvisibleWallLeft invisibleWallLeft2 = new InvisibleWallLeft(25, 55);
-        addObject(invisibleWallLeft2,514,224);
-        InvisibleCeiling invisibleCeiling2 = new InvisibleCeiling(400, 30);
-        addObject(invisibleCeiling2,707,248);
+        addObject(floorInicial, 540, 140);
+        addObject(floor, 100, 460);
+        addObject(floor2, 315, 460);
+        addObject(floor3, 533, 460);
+        addObject(floor4, 330, 180);
+        addObject(floor5, 100, 320);
+        addObject(floor6, 315, 320);
+        addObject(trollGeneral,533, 400);
+        addObject(trollGeneral2,315, 400);
+        addObject(rangerTroll,100, 400);
+        addObject(invisibleCeiling,190, 320);
+        addObject(invisibleCeiling2,330, 180);
+        addObject(invisibleWallRight,415, 317);
+        addObject(invisibleWallLeft,237, 175);
+        addObject(invisibleWallLeft2,446,154);
     }
 
     /**
@@ -61,6 +61,6 @@ public class World9 extends World
      */
     public void addPlayer(Player player)
     {
-        addObject(player, 1150, 95);
+        addObject(player, 540, 70);
     }
 }

@@ -10,7 +10,7 @@ public class Relleno extends Actor
 {
     public Relleno()
     {
-        getImage().scale(420,300);
+        getImage().scale(220,200);
     }
 
     /**

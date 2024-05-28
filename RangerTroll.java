@@ -22,11 +22,10 @@ public class RangerTroll extends Enemy
     {
         if(getIsAlive())
         {
-            setOriginalPosition();
             checkFalling();
-            getDamaged();
-            wander(50,50,600);
             checkForPlayerAtLeft();
+            wander(50,50,600);
+            getDamaged();
             if(getEnemyInvincible())
                 enemyInvincibilityTimer();
         }

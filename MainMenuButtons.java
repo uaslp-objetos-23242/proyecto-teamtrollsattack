@@ -56,6 +56,15 @@ public class MainMenuButtons extends Actor
             }
         }
     }
+    
+    public void reestart()
+    {
+        if(Greenfoot.isKeyDown("r"))
+            {
+                Greenfoot.setWorld(w1);
+                getWorld().removeObject(this);
+            }
+    }
 
     /**
      * Adquiere una copia del jugador para obtener datos relevantes

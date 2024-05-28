@@ -72,7 +72,7 @@ public abstract class Entity extends Actor
      */
     public boolean onGround()
     {
-        Actor under = getOneObjectAtOffset(0, getImage().getHeight()/2, Floor.class);
+        Actor under = getOneObjectAtOffset(0, getImage().getHeight()/2 , Floor.class);
         return under != null;
     }
 

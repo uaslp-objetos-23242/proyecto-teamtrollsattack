@@ -18,7 +18,7 @@ public class WorldFinal extends World
     public WorldFinal()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1200, 800, 1); 
+        super(640,460, 1); 
         prepare();
         risaTrollBoss.setVolume(80);
     }
@@ -38,11 +38,11 @@ public class WorldFinal extends World
         Floor floor3 = new Floor();
         Floor floor4 = new Floor();
         addObject(floorInicial, 50, 200);
-        addObject(floor, 200, 800);
-        addObject(floor2, 600, 800);
-        addObject(floor3, 1000, 800);
+        addObject(floor, 100, 460);
+        addObject(floor2, 315, 460);
+        addObject(floor3, 533, 460);
         TrollBoss trollBoss = new TrollBoss(true);
-        addObject(trollBoss,800,620);
+        addObject(trollBoss,400,380);
     }
     
     /**

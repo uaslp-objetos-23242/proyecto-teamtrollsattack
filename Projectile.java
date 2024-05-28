@@ -16,14 +16,4 @@ public abstract class Projectile extends Enemy
     {
         super(1,1,1);
     }
-
-    public void act()
-    {
-
-    }
-
-    public void engage()
-    {
-
-    }
 }
