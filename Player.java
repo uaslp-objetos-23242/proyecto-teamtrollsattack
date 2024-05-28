@@ -13,7 +13,7 @@ public class Player extends Entity
     // Puntos de experiencia para mejorar sus atributos
     private int expPoints;
     // Altura maxima que puede saltar
-    private int jumpHeight = -20;
+    private int jumpHeight = -14;
     // Gravedad del jugador
     private int gravity = 0;
     // Sirve para llevar un flujo mas manejable de la gravedad y algunos temporizadores
@@ -82,7 +82,6 @@ public class Player extends Entity
         {
             checkFalling();
             getPushedByInvisibleWalls();
-            debugHud();
             hud();
             count++;
             slideAround();
@@ -223,7 +222,7 @@ public class Player extends Entity
      */
     public boolean isDamaged()
     {
-        Actor attacker = getOneObjectAtOffset(0, 0, Enemy.class);
+        Actor attacker = getOneObjectAtOffset(0, 0, Projectile.class);
         if(attacker != null)
             return true;
         else
@@ -382,47 +381,47 @@ public class Player extends Entity
             case 1:
                 if(worldKillCount == 1)
                 {
-                    getWorld().addObject(goal, 1150, 726);
+                    getWorld().addObject(goal, 600, 410);
                 }  
             case 2:
                 if(worldKillCount == 1)
                 {
-                    getWorld().addObject(goal, 50, 626);
+                    getWorld().addObject(goal, 50, 377);
                 }       
             case 3:
                 if(worldKillCount == 1)
                 {
-                    getWorld().addObject(goal, 1150, 726);
+                    getWorld().addObject(goal, 550, 416);
                 } 
             case 4:
                 if(worldKillCount == 2)
                 {
-                    getWorld().addObject(goal,110,725);
+                    getWorld().addObject(goal, 40, 416);
                 } 
             case 5:
                 if(worldKillCount == 2)
                 {
-                    getWorld().addObject(goal,70,725);
+                    getWorld().addObject(goal, 40, 416);
                 } 
             case 6:
                 if(worldKillCount == 2)
                 {
-                    getWorld().addObject(goal, 50, 225);
+                    getWorld().addObject(goal, 50, 207);
                 } 
             case 7:
                 if(worldKillCount == 2)
                 {
-                    getWorld().addObject(goal,610,685);
+                    getWorld().addObject(goal, 330, 396);
                 } 
             case 8:
                 if(worldKillCount == 3)
                 {
-                    getWorld().addObject(goal, 1150, 726);
+                    getWorld().addObject(goal, 550, 416);
                 } 
             case 9:
                 if(worldKillCount == 3)
                 {
-                    getWorld().addObject(goal,110,725);
+                    getWorld().addObject(goal, 40, 416);
                 }
         }
     }
